@@ -1,0 +1,68 @@
+<app-header></app-header>
+
+<div class="row">
+  <div class="col-lg-12" >
+    <img src="assets/images/Bid-Banner.png" width="100%" height="260" >
+  </div>
+  </div>
+  <div class="container">
+  <div class="row " style="margin-bottom: 20px;margin-top: 20px">
+      <div class="col-lg-2" style="padding: 0;margin:0;margin-left:100px">
+          <div class="categoryLabel">Category</div>
+              <select (change)="filterByCat()" class="form-control">
+                <option *ngFor="let color of Categories" [value]="color">{{color}}</option>
+              </select>
+            </div>
+    
+          <div class="col-lg-2">
+            <div class="categoryLabel">Location</div>
+              <select class="form-control">
+                                 <option *ngFor="let color of Cities" [value]="color.id">{{color.Name}}</option>
+              </select>
+                </div>
+                <div class="col-lg-2">
+            <div class="categoryLabel">Price</div>
+            <select  (change)="filterByCat()" class="form-control">
+                        <option *ngFor="let color of Prices" [value]="color.id">{{color.Name}}</option>
+                      </select>
+                      </div>
+                      <div class="col-lg-2">
+            <div class="categoryLabel">Relatives</div>
+            <select class="form-control">
+                              <option *ngFor="let color of Relatives" [value]="color.id">{{color.Name}}</option>
+                            </select>
+                            </div>
+                            <div class="col-lg-2" style="padding: 0;margin:0">
+            <div class="categoryLabel">Posted Within</div>
+            <select class="form-control">
+                                    <option *ngFor="let color of Within" [value]="color.id">{{color.Name}}</option>
+                                  </select>
+                                  </div>
+    </div>
+  
+  <div class="row">
+    <!-- <div class="col-3">
+      <product-filter [category]="category"></product-filter>
+    </div> -->
+    <div class="col">
+      <div class="row" >
+        <ng-container *ngFor="let product of filteredProducts; let i = index">
+          <div class="col-lg-2" style="padding-right: 10px;padding-left: 10px;">
+            <a class="actionBtn" [routerLink]="['/admin/products/details', product.key]">
+              
+              <div *ngIf="product.itemName" class="cardd">
+                <img *ngIf="product.photosURL" class="img-responsive card-img" [src]="product.photosURL" alt="{{ product.itemName }}">
+                <div class="card-body">
+                  <p class="card-text">{{ product.price | currency:'USD':true }}</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div *ngIf="(i+1) % 6 === 0" class="w-100"></div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <!-- The Modal -->
+  
+</div>

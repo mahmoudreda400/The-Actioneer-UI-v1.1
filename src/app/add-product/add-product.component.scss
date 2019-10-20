@@ -1,0 +1,28 @@
+body {
+    padding-top: 20px;
+}
+img{
+    align-self: center;
+    margin-top: 20px;
+  }
+  input[type=file]{
+  padding:10px;
+  background:#eee;}
+
+  .card{
+    margin-bottom: 30px;
+}
+.card-img { 
+    height: 70%;
+    width:70%;
+  }
+.card-footer {
+    padding: 0;
+    background: #fff;
+}
+.card-footer button {
+    cursor: pointer;
+  }
+  .card-desc {
+    font-size: 14px
+  }

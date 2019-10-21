@@ -14,7 +14,7 @@ export class ApiService {
 
   register(person) :Observable<any> {
     return this.http.post(this.baseUrl+ '/register', person,  {
-      responseType: 'json'
+      responseType: 'json' as 'json'
     });
   }
 
@@ -23,7 +23,7 @@ export class ApiService {
     body.append('email', email);
     body.append('password', password);
     return this.http.post(this.baseUrl + '/login', body,   {
-      responseType: 'json'
+      responseType: 'json' as 'json'
     });
   }
 }

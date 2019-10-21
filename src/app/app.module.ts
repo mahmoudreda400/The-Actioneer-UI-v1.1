@@ -13,6 +13,10 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AdminReportsComponent } from './admin-reports/admin-reports.component';
 import { AdminBlockedUsersComponent } from './admin-blocked-users/admin-blocked-users.component';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'; 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +32,11 @@ import { AdminBlockedUsersComponent } from './admin-blocked-users/admin-blocked-
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

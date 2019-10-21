@@ -1,50 +1,52 @@
 <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background:#fff">
   <div class="row">
     <div class="col-md-1">
-      <a routerLink="/"><img src="assets/images/auctioneer.png" width="50" height="50" style="margin-left:20px;margin-right:20px"/></a>
+      <a routerLink="/"><img src="assets/images/auctioneer.png" width="50" height="50"
+          style="margin-left:20px;margin-right:20px" /></a>
     </div>
     <div class="collapse navbar-collapse col-md-11" style="padding-top: 20px;" id="navbarsExampleDefault">
-     
+
       <ul class="navbar-nav">
-          <ng-template #anonymousUser>
-            <li class="nav-item">
-              <a class="simpleBtn"  (click)="login()">Log In</a>
-            </li>
-          </ng-template>
-          <li ngbDropdown *ngIf="appUser; else anonymousUser" class="nav-item dropdown">
-            <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              {{ appUser.name }}{{ appUser.firstName }} {{ appUser.lastName }}
-            </a>
-            <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" routerLink="/profile">Profile</a>
-              <ng-container *ngIf="appUser.isAdmin || appUser.admin">
-                <a class="dropdown-item" routerLink="admin/statistics">Statistics</a>
-                <a class="dropdown-item" routerLink="admin/reports">Reports</a>
-              </ng-container>
-              <a *ngIf="appUser" class="dropdown-item" (click)="logout()">Logout</a>
-            </div>
-            
-          </li>
-          <li *ngIf="appUser" class="nav-item dropdown" style="margin-right: 10px">
-            <a href="#" class="notification">
-              <span class="fa fa-bell fa-2x"></span>
-              <span class="badge">3</span>
-            </a>
-            <div class="dropdown-content">
-              <a href="#">Link 1</a>
-              <a href="#">Link 2</a>
-              <a href="#">Link 3</a>
-            </div>
-            </li>
+        <ng-template #anonymousUser>
           <li class="nav-item">
-            <input class="Search" type="text" placeholder="Search">
+            <a class="simpleBtn" (click)="showLogin()">Log In</a>
           </li>
-      
-          <li class="nav-item" style="margin-left: 20px">
-                  <a style="color: #fff" class="actionBtn" routerLink="/addProduct">Sell Your Staff</a>
-                </li>
-        </ul>
-      </div>
+        </ng-template>
+        <li ngbDropdown *ngIf="appUser; else anonymousUser" class="nav-item dropdown">
+          <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{ appUser.name }}{{ appUser.firstName }} {{ appUser.lastName }}
+          </a>
+          <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" routerLink="/profile">Profile</a>
+            <ng-container *ngIf="appUser.isAdmin || appUser.admin">
+              <a class="dropdown-item" routerLink="admin/statistics">Statistics</a>
+              <a class="dropdown-item" routerLink="admin/reports">Reports</a>
+            </ng-container>
+            <a *ngIf="appUser" class="dropdown-item" (click)="logout()">Logout</a>
+          </div>
+
+        </li>
+        <li *ngIf="appUser" class="nav-item dropdown" style="margin-right: 10px">
+          <a href="#" class="notification">
+            <span class="fa fa-bell fa-2x"></span>
+            <span class="badge">3</span>
+          </a>
+          <div class="dropdown-content">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <input class="Search" type="text" placeholder="Search">
+        </li>
+
+        <li class="nav-item" style="margin-left: 20px">
+          <a style="color: #fff" class="actionBtn" routerLink="/addProduct">Sell Your Staff</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
 
@@ -57,25 +59,43 @@
 </main>
 <div id="loginModal" class="modal">
 
-    <!-- Modal content -->
-          <div class="form">
-      <span (click)="closeModal()" class="close pull-right" style="margin-right:-40px;margin-top: -40px">&times;</span>
-      <form (ngSubmit)="signUp(f.value)" *ngIf="loginShow" class="login-form">
-        <input id="first" name="firstName" type="text" placeholder="first name"/>
-        <input id="last"  name="lastName" type="text" placeholder="last name"/>
-        <input id="pass"  name="password" type="password" placeholder="password"/>
-        <input id="email" name="email" type="text" placeholder="email address"/>
-        <input id="phone" name="phone" type="text" placeholder="phone number"/>
-              <button>create</button>
-              <p class="message" (click)="toggle()">Already registered? <a href="#">Sign In</a></p>
-            </form>
-            <form (ngSubmit)="loginUser(f.value)" *ngIf="!loginShow" class="login-form">
-              <input id="email" name="email" type="text" placeholder="username" required/>
-              <input id="pass"  name="password" type="password" placeholder="password" required/>
-              <button>login</button>
-              <p class="message" (click)="toggle()">Not registered? <a href="#">Create an account</a></p>
-            </form>
-          </div>
+  <!-- Modal content -->
+  <div class="form">
+    <span (click)="closeModal()" class="close pull-right" style="margin-right:-40px;margin-top: -40px">&times;</span>
+    <form [formGroup]="registerForm" (ngSubmit)="register()" *ngIf="loginShow" class="login-form">
+      <input id="name" name="name" formControlName="name" type="text" placeholder="Name"
+        [ngClass]="{ 'is-invalid': registerSubmitted && rf.name.errors }">
+      <div *ngIf="registerSubmitted && rf.name.errors" class="error-msg">
+        <div *ngIf="rf.name.errors.required">Name is required</div>
+      </div>
+      <input id="email" name="email" type="email" formControlName="email" placeholder="Email" 
+      [ngClass]="{ 'is-invalid': registerSubmitted &&rf.email.errors }">
+      <div *ngIf="registerSubmitted && rf.email.errors" class="error-msg">
+        <div *ngIf="rf.email.errors.required">Name is required</div>
+      </div>
+      <input id="password" name="password" type="password" formControlName="password" placeholder="password" 
+      [ngClass]="{ 'is-invalid': registerSubmitted && rf.password.errors }">
+      <div *ngIf="registerSubmitted && rf.password.errors" class="error-msg">
+        <div *ngIf="rf.password.errors.required">Name is required</div>
+      </div>
+      <input id="address" name="address" type="text" formControlName="address" placeholder="address" />
+      <input id="phone" name="phone" type="text" formControlName="phone" placeholder="phone number" />
+      <button type="submit">create</button>
+      <p class="message" (click)="toggle()">Already registered? <a>Sign In</a></p>
+    </form>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" *ngIf="!loginShow" class="login-form">
+      <input id="email" name="email" type="text" formControlName="email" placeholder="Email" required
+        [ngClass]="{ 'is-invalid': loginSubmitted && lf.email.errors }" />
+      <div *ngIf="loginSubmitted && lf.email.errors" class="error-msg">
+        <div *ngIf="lf.email.errors.required">Name is required</div>
+      </div>
+      <input id="pass" name="password" type="password" formControlName="password" placeholder="password" required 
+      [ngClass]="{ 'is-invalid': loginSubmitted && lf.password.errors }">
+      <div *ngIf="loginSubmitted && lf.password.errors" class="error-msg">
+          <div *ngIf="lf.password.errors.required">Password is required</div>
+      </div>
+      <button>login</button>
+      <p class="message" (click)="toggle()">Not registered? <a>Create an account</a></p>
+    </form>
   </div>
-
-  
+</div>

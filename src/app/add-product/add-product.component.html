@@ -1,103 +1,150 @@
 <app-header></app-header>
-<div class="row container">
-  <div class="col-md-6">
-    <form (ngSubmit)="save(f.value)">
-        <div class="form-group">
-            <label for="imageUrl">Upload your product photo</label><br/>
-            
-            <input type='file' (change)="readURL($event.target);" accept="image/gif, image/jpeg, image/png"/><br/>
-            <img [src]="product.imageUrl" id="imageUrl" class="img-responsive" />
-            <!-- <div class="alert alert-danger" >
-              <div >ImageUrl is required</div>
-              <div >Please enter a valid url</div>
-            </div> -->
-          </div>
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input name="title" id="title" type="text" class="form-control" required>
-            <!-- <div class="alert alert-danger">
-              Title is required.
-            </div> -->
-          </div>
-        <div class="form-group">
-            <label for="desc">Description</label>
-            <textarea name="desc" id="desc" rows="4" cols="60" class="form-control"></textarea>
-          </div>
-     
-      <div class="form-group">
-        <label for="price">price</label>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">$</span>
-          </div>
-          <input name="price" id="price" type="number" class="form-control" required [min]="0">
+<div class=" container" style="padding-top: 6%;">
+  <div class="row">
+    <div class="col-md-6">
+      <form [formGroup]="postForm" (ngSubmit)="savePost()">
+        <!-- <div class="form-group">
+        <label for="imageUrl">Upload your product photo</label><br />
+
+        <input type='file' formControlName="photos" (change)="readURL($event.target);"
+          accept="image/gif, image/jpeg, image/png"
+          [ngClass]="{ 'is-invalid': submitted && postForm.controls.photos.errors }">
+        <div *ngIf="submitted && postForm.controls.photos.errors" class="error-msg">
+          <div *ngIf="postForm.controls.photos.errors.required">Name is required</div>
         </div>
-        <!-- <div class="alert alert-danger" >
+        <br />
+        <img [src]="product.imageUrl" id="imageUrl" class="img-responsive" />
+        
+      </div> -->
+
+        <div class="form-group custom-file mb-3">
+          <input type="file" (change)="uploadFile($event)" formControlName="photos" class="custom-file-input"
+            id="customFile" name="filename" [ngClass]="{ 'is-invalid': submitted && postForm.controls.photos.errors }">
+          <div *ngIf="submitted && postForm.controls.photos.errors" class="error-msg">
+            <div *ngIf="postForm.controls.photos.errors.required">Name is required</div>
+          </div>
+          <label class="custom-file-label" for="customFile">{{uploadedText}}</label>
+        </div>
+
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input name="title" formControlName="title" id="title" type="text" class="form-control" required
+            [ngClass]="{ 'is-invalid': submitted && postForm.controls.title.errors }">
+          <div *ngIf="submitted && postForm.controls.title.errors" class="error-msg">
+            <div *ngIf="postForm.controls.title.errors.required">Name is required</div>
+          </div>
+
+        </div>
+        <div class="form-group">
+          <label for="desc">Description</label>
+          <textarea formControlName="description" name="desc" id="desc" rows="4" cols="60"
+            class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="expirDate">Expiration Date</label>
+          <input name="expirDate" formControlName="expirDate" id="expirDate" type="date" class="form-control" required
+            [ngClass]="{ 'is-invalid': submitted && postForm.controls.expirDate.errors }">
+          <div *ngIf="submitted && postForm.controls.expirDate.errors" class="error-msg">
+            <div *ngIf="postForm.controls.expirDate.errors.required">Name is required</div>
+          </div>
+
+        </div>
+        <div class="form-group">
+          <label for="price">price</label>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">$</span>
+            </div>
+            <input formControlName="minPrice" name="price" id="price" type="number" class="form-control" required
+              [ngClass]="{ 'is-invalid': submitted && postForm.controls.minPrice.errors }">
+            <div *ngIf="submitted && postForm.controls.minPrice.errors" class="error-msg">
+              <div *ngIf="postForm.controls.minPrice.errors.required">Name is required</div>
+            </div>
+
+          </div>
+          <!-- <div class="alert alert-danger" >
           <div>Price is required.</div>
           <div>Price should be zero or heigher.</div>
 
         </div> -->
 
-      </div>
-      <div class="form-group">
-        <label for="category">Category</label>
-        <select name="category" id="category" class="form-control" required>
-          <option value=""></option>
-          <option *ngFor="let c of categories$ | async" [value]="c.key">
-            {{ c.name }}
-          </option>
-        </select>
-        <!-- <div class="alert alert-danger">
+        </div>
+
+        <div class="form-group">
+          <label for="incrValue">Bidding Value</label>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">$</span>
+            </div>
+            <input formControlName="incrValue" name="incrValue" id="incrValue" type="number" class="form-control"
+              required [ngClass]="{ 'is-invalid': submitted && postForm.controls.incrValue.errors }">
+            <div *ngIf="submitted && postForm.controls.incrValue.errors" class="error-msg">
+              <div *ngIf="postForm.controls.incrValue.errors.required">Name is required</div>
+            </div>
+          </div>
+          <!-- <div class="alert alert-danger" >
+            <div>Price is required.</div>
+            <div>Price should be zero or heigher.</div>
+  
+          </div> -->
+
+        </div>
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select formControlName="category" name="category" id="category" class="form-control" required
+            [ngClass]="{ 'is-invalid': submitted && postForm.controls.category.errors }">
+            <option value=""></option>
+            <option *ngFor="let c of categories " [value]="c.id">
+              {{ c.name }}
+            </option>
+          </select>
+
+          <div *ngIf="submitted && postForm.controls.category.errors" class="error-msg">
+            <div *ngIf="postForm.controls.category.errors.required">Name is required</div>
+          </div>
+          <!-- <div class="alert alert-danger">
           Category is required.
         </div> -->
-      </div>
-      <div class="row">
-        <div class="col-xs-4" style="margin-left:20px">
-        <div class="form-group">
-        <label for="category">City</label>
-        <select class="form-control">
-                               <option *ngFor="let color of Cities" [value]="color.id">{{color.Name}}</option>
-            </select>
         </div>
+        <div class="row">
+          <div class="col-xs-4" style="margin-left:20px">
+            <div class="form-group">
+              <label for="category">country</label>
+              <select formControlName="country" class="form-control">
+                <option *ngFor="let color of Cities" [value]="color.id">{{color.Name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-xs-7" style="margin-left:20px">
+            <div class="form-group">
+              <label for="category">City</label>
+              <select formControlName="city" class="form-control">
+                <option *ngFor="let color of Cities" [value]="color.id">{{color.Name}}</option>
+              </select>
+            </div>
+          </div>
         </div>
-        <div class="col-xs-7" style="margin-left:20px">
-        <div class="form-group">
-        <label for="category">Street</label>
-        <input name="street" id="street" type="text" class="form-control" required>
-            <!-- <div class="alert alert-danger">
-              Street is required.
-            </div> -->
+
+
+        <button type="submit" class="btn btn-primary" style="margin-right: 20px">save</button>
+        <button type="button" (click)="delete()" class="btn btn-danger">Delete</button>
+      </form>
+      <div class="error-msg">{{msg}}</div>
+    </div>
+    <div class="col-md-6">
+      <div class="card" *ngIf="imageView != null">
+        <img class="img-responsive card-img" [src]="imageView" alt="{{ product.title }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ postForm.value.title }}</h5>
+          <h5 class="card-desc">{{ postForm.value.expirDate }}</h5>
+          <p class="card-text">{{ postForm.value.price | currency:'USD':true }}</p>
+          <h5 class="card-title">{{ postForm.value.category.name }}</h5>
+
         </div>
-        </div>
+
+
       </div>
-      
-      
-      <button class="btn btn-primary" style="margin-right: 20px">save</button>
-      <button type="button" (click)="delete()" class="btn btn-danger">Delete</button>
-    </form>
-  </div>
-  <div class="col-md-6">
-    <div  class="card">
-      <img  class="img-responsive card-img" [src]="product.imageUrl" alt="{{ product.title }}">
-      <div class="card-body">
-        <h5 class="card-title">{{ product.title }}</h5>
-        <h5 class="card-desc">{{ product.desc }}</h5>
-        <p class="card-text">{{ product.price | currency:'USD':true }}</p>
-        <h5 class="card-title">{{ product.street }}</h5>
-        
-      </div>
-      <div class="row"> 
-        <div class="col-lg-4"><div *ngIf="showActions && shoppingCart" class="pull-left">
-            <button type="button" class="btn" (click)="like()" ><span class="fa fa-heart" style="color: white"></span></button>
-          </div></div>
-          <div class="col-lg-4"><div *ngIf="showActions && shoppingCart" style="text-align: center">
-              <button type="button" class="btn" (click)="like()" ><span class="fa fa-comment" style="color: black"></span></button>
-            </div></div>
-            <div class="col-lg-4"><div *ngIf="showActions && shoppingCart" class="pull-right">
-                <button type="button" class="btn" (click)="like()" ><span class="fa fa-share" style="color: grey"></span></button>
-              </div></div>
-      </div>
-      
     </div>
   </div>
 </div>

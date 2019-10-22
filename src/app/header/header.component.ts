@@ -28,6 +28,12 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.createLoginForm();
     this.createRegister();
+    this.checkUserExist();
+  }
+
+  checkUserExist(){
+    if(localStorage.getItem('userData'))
+        this.appUser = JSON.parse(localStorage.getItem('userData'));
   }
 
   createLoginForm() {
@@ -56,6 +62,18 @@ export class HeaderComponent implements OnInit {
     modal.style.display = "block";
   }
 
+  userAction(obj){
+    //console.log('target: ' + obj.target);
+    if(obj.target.selectedIndex == 1)
+        this.router.navigate(['/profile']);
+    else if(obj.target.selectedIndex == 2)
+    this.router.navigate(['/statistics']);
+
+  }
+
+  goToProfile(){
+    alert('Profile');
+  }
   login() {
     this.loginSubmitted = true;
     if (this.loginForm.invalid) {
@@ -67,6 +85,7 @@ export class HeaderComponent implements OnInit {
       console.log('' ,data.name );
       if(data.message == 'success'){
         this.appUser = data;
+        localStorage.setItem('userData',JSON.stringify(data));
         localStorage.setItem('token',data.token);
         localStorage.setItem('name',data.name);
         localStorage.setItem('type',data.name);
@@ -100,6 +119,7 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('type');
     localStorage.removeItem('name');
+    localStorage.removeItem('userDate');
     //this.auth.logout();
   }
 

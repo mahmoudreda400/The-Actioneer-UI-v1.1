@@ -18,7 +18,7 @@ export class ApiService {
     });
   }
 
-  login(email, password) :Observable<any>{
+  login(email, password): Observable<any> {
     let body = new FormData();
     body.append('email', email);
     body.append('password', password);
@@ -26,6 +26,7 @@ export class ApiService {
       responseType: 'json' as 'json'
     });
   }
+<<<<<<< HEAD
   getAllPost() :Observable<any>{
     return this.http.get(this.baseUrl + '/Allposts',    {
       responseType: 'json' as 'json'
@@ -47,4 +48,34 @@ export class ApiService {
 
 // }
 
+=======
+
+  getAllCategories(): Observable<any> {
+    return this.http.get(this.baseUrl + '/getAllCategories', {
+      responseType: 'json' as 'json'
+    });
+  }
+
+  savePost(post, images): Observable<any> {
+    const token = localStorage.getItem('token');
+    console.log(token);
+    // let headers = new HttpHeaders({
+    //   'Authorization': token,
+    //   'responseType': 'json'
+    // });
+    let headers = new HttpHeaders({
+      'Authorization': token
+    });
+    const options = { responseType: 'text' as 'json', headers };
+    let body = new FormData();
+    for (let image of images) {
+      body.append('images', image);
+    }
+    body.append("post", new Blob([JSON.stringify(post)],
+      {
+        type: "application/json"
+      }));
+    return this.http.post(this.baseUrl + '/addPost', body, options);
+  }
+>>>>>>> 85d237345f2ff4e5f7b27ac971d2a2c94c63e21a
 }

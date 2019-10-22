@@ -47,12 +47,14 @@
     <div class="col">
       <div class="row" >
         <ng-container *ngFor="let product of filteredProducts; let i = index">
+         
           <div class="col-lg-2" style="padding-right: 10px;padding-left: 10px;">
             <div >
               
-              <div *ngIf="product.itemName" class="cardd">
+              <div *ngIf="product.title" class="cardd">
+                
                 <div class="row">
-                  <div class="col-md-8">user name</div>
+                  <div class="col-md-8">{{product?.user?.name}}</div>
                   <div class="col-md-4">
                       <select (change)="itemAction($event)" id="menuActions"  class="form-control" style="width: 20px;height: 20px">
                           <option value="none"></option>
@@ -61,9 +63,9 @@
                         </select>
                   </div>
                 </div>
-                <img *ngIf="product.photosURL" class="img-responsive card-img" (click)="goToDetails(product)" [src]="product.photosURL" alt="{{ product.itemName }}">
+                <img *ngIf="product?.photos != null" class="img-responsive card-img" (click)="goToDetails(product)" [src]="product.photos[0].url" alt="{{ product.title}}">
                 <div class="card-body">
-                  <p class="card-text">{{ product.price | currency:'USD':true }}</p>
+                  <p class="card-text">{{ product.minPrice | currency:'USD':true }}</p>
                 </div>
               </div>
             </div>

@@ -12,19 +12,20 @@
             <a class="simpleBtn" (click)="showLogin()">Log In</a>
           </li>
         </ng-template>
-        <li ngbDropdown *ngIf="appUser; else anonymousUser" class="nav-item dropdown">
-          <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+        <li *ngIf="appUser; else anonymousUser" class="nav-item dropdown">
+          <div>
             {{ appUser.name }}{{ appUser.firstName }} {{ appUser.lastName }}
-          </a>
-          <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" routerLink="/profile">Profile</a>
-            <ng-container *ngIf="appUser.isAdmin || appUser.admin">
-              <a class="dropdown-item" routerLink="admin/statistics">Statistics</a>
-              <a class="dropdown-item" routerLink="admin/reports">Reports</a>
-            </ng-container>
-            <a *ngIf="appUser" class="dropdown-item" (click)="logout()">Logout</a>
           </div>
+        </li>
+        <li *ngIf="appUser" class="nav-item dropdown">
+          <select id="userActions" (change)="userAction($event)" class="form-control" style="width: 20px;height: 20px">
+              <option value="none"></option>
+              <option value="profile"> Profile</option>
+              <option value="statistics">Statistics</option>
+              <option value="reports">Reports</option>
+              <option value="blockedUsers">Blocked Users</option>
+              <option value="logOut">Logout</option>
+            </select>
 
         </li>
         <li *ngIf="appUser" class="nav-item dropdown" style="margin-right: 10px">

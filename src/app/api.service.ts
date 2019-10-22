@@ -26,4 +26,25 @@ export class ApiService {
       responseType: 'json' as 'json'
     });
   }
+  getAllPost() :Observable<any>{
+    return this.http.get(this.baseUrl + '/Allposts',    {
+      responseType: 'json' as 'json'
+    });
+  }
+  getPostById(id):Observable<any>{
+    
+    return this.http.get(this.baseUrl+'/posts/'+'${id}',{responseType: 'json' as 'json'}) ;
+
+
+}
+// getProfileData(token):Observable<any>
+// {
+  // let header = new HttpHeaders();
+  // header.append('Authorization',token)
+  // return this.http.get(this.baseUrl+'/profileData',header,   {
+  //   responseType: 'json' as 'json'
+  // });
+
+// }
+
 }

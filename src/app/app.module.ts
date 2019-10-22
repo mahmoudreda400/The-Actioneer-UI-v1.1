@@ -14,7 +14,8 @@ import { AdminReportsComponent } from './admin-reports/admin-reports.component';
 import { AdminBlockedUsersComponent } from './admin-blocked-users/admin-blocked-users.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
+import { ProductDetailsComponent } from './product-details/product-details.component'; 
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { HttpClientModule } from '@angular/common/http';
     AddProductComponent,
     AdminDashboardComponent,
     AdminReportsComponent,
-    AdminBlockedUsersComponent
+    AdminBlockedUsersComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,

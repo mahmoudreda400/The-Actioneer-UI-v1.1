@@ -66,6 +66,7 @@ export class HeaderComponent implements OnInit {
       console.log(' >> login data: ', data);
       console.log('' ,data.name );
       if(data.message == 'success'){
+        this.appUser = data;
         localStorage.setItem('token',data.token);
         localStorage.setItem('name',data.name);
         localStorage.setItem('type',data.name);
@@ -87,61 +88,6 @@ export class HeaderComponent implements OnInit {
       console.log('>>> register fata : ', data);
       this.closeModal();
     });
-  }
-
-  signUp(user) {
-    user.createdDate = + new Date();
-    alert('Under Construction');
-    // this.http.post(environment.url + 'user/add',user ).subscribe(response => {
-    //     this.loginShow = true;
-    //   })
-  }
-  loginUser(user) {
-    if (user.email == 'admin' && user.password == 'admin') {
-      this.appUser = {
-        "id": 58,
-        "firstName": "Ahmed",
-        "lastName": "Fares",
-        "email": "ahmed.fares101@gmail.com",
-        "address": null,
-        "mobile": null,
-        "whatsapp": null,
-        "active": null,
-        "blocked": null,
-        "password": "123",
-        "seller": null,
-        "buyer": null,
-        "token": "8a474b4a-46e5-4de1-bfb8-6d84d3da7fcc",
-        "createdDate": null,
-        "admin": true
-      };
-      var modal = document.getElementById("loginModal");
-      modal.style.display = "none";
-      sessionStorage.setItem('userLoggedIn', JSON.stringify(this.appUser));
-    }
-    else if (user.email == 'user' && user.password == 'user') {
-      this.appUser = {
-        "id": 58,
-        "firstName": "Mustafa",
-        "lastName": "Anwar",
-        "email": "ahmed.fares90@gmail.com",
-        "address": null,
-        "mobile": null,
-        "whatsapp": null,
-        "active": null,
-        "blocked": null,
-        "password": "123",
-        "seller": null,
-        "buyer": null,
-        "token": "8a474b4a-46e5-4de1-bfb8-6d84d3da7fcc",
-        "createdDate": null,
-        "admin": false
-      };
-      var modal = document.getElementById("loginModal");
-      modal.style.display = "none";
-      sessionStorage.setItem('userLoggedIn', JSON.stringify(this.appUser));
-    }
-
   }
   closeModal() {
     var modal = document.getElementById("loginModal");

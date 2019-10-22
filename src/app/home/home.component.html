@@ -48,21 +48,41 @@
       <div class="row" >
         <ng-container *ngFor="let product of filteredProducts; let i = index">
           <div class="col-lg-2" style="padding-right: 10px;padding-left: 10px;">
-            <a class="actionBtn" [routerLink]="['/admin/products/details', product.key]">
+            <div >
               
               <div *ngIf="product.itemName" class="cardd">
-                <img *ngIf="product.photosURL" class="img-responsive card-img" [src]="product.photosURL" alt="{{ product.itemName }}">
+                <div class="row">
+                  <div class="col-md-8">user name</div>
+                  <div class="col-md-4">
+                      <select (change)="itemAction($event)" id="menuActions"  class="form-control" style="width: 20px;height: 20px">
+                          <option value="none"></option>
+                          <option value="edit"> <a style="color: #fff" class="actionBtn" class="actionBtn">Edit Post</a></option>
+                          <option value="report">Report User</option>
+                        </select>
+                  </div>
+                </div>
+                <img *ngIf="product.photosURL" class="img-responsive card-img" (click)="goToDetails(product)" [src]="product.photosURL" alt="{{ product.itemName }}">
                 <div class="card-body">
                   <p class="card-text">{{ product.price | currency:'USD':true }}</p>
                 </div>
               </div>
-            </a>
+            </div>
           </div>
           <div *ngIf="(i+1) % 6 === 0" class="w-100"></div>
         </ng-container>
       </div>
     </div>
   </div>
-  <!-- The Modal -->
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content" style="padding-top: 10px;">
+        <span (click)="closeModal()" class="close pull-right" style="position: absolute;right: 10px;">&times;</span>
+        <h2 style="text-align: center;">report User</h2>
+        <textarea class="form-control" cols="10" rows="6" placeholder="Enter your report here"></textarea>
+        <button class="btn btn-primary pull-right" style="width: 100px;margin-top: 10px;margin-left: 500px;">Submit</button>
+    </div>
   
+  </div>
 </div>

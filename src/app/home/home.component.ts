@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -27,7 +28,7 @@ export class HomeComponent implements OnInit {
     imageUrl: ''
   };
 
-  constructor() {
+  constructor(private router: Router) {
     
    }
   ngOnInit() {
@@ -35,6 +36,31 @@ export class HomeComponent implements OnInit {
     this.getFilteredProducts();
   }
   
+  itemAction(obj){
+    if(obj.target.selectedIndex == 1)
+        this.router.navigate(['/addProduct']);
+    else if(obj.target.selectedIndex == 2)
+        {
+            let modal = document.getElementById("myModal");
+            modal.style.display = "block";
+            window.onclick = function(event) {
+              if (event.target == modal) {
+                modal.style.display = "none";
+              }
+            }
+        }
+  }
+  goToDetails(product){
+    sessionStorage.setItem('selectedProduct',JSON.stringify(product));
+    this.router.navigate(['/productDetails']);
+  }
+
+// When the user clicks on <span> (x), close the modal
+closeModal() {
+  let modal = document.getElementById("myModal");
+  modal.style.display = "none";
+}
+
 
   getFilteredProducts() {
 

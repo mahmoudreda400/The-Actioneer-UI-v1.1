@@ -1,3 +1,5 @@
+import { StatisticsComponent } from './statistics/statistics.component';
+import { ProfileComponent } from './profile/profile.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { HomeComponent } from './home/home.component';
@@ -14,6 +16,12 @@ const routes: Routes = [
   },{
     path:'productDetails',
     component: ProductDetailsComponent
+  },{
+    path:'profile',
+    component: ProfileComponent
+  },{
+    path:'statistics',
+    component: StatisticsComponent
   }
 ];
 

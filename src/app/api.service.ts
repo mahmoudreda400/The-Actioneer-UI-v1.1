@@ -12,15 +12,9 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-<<<<<<< HEAD
-  register(person): Observable<any> {
-    return this.http.post(this.baseUrl + '/register', person, {
-      responseType: 'text' as 'json'
-=======
   register(person) :Observable<any> {
     return this.http.post(this.baseUrl+ '/register', person,  {
       responseType: 'json' as 'json'
->>>>>>> b58a8aacfd140801545f3c4cd4787adeb6dd8b8b
     });
   }
 
@@ -28,11 +22,7 @@ export class ApiService {
     let body = new FormData();
     body.append('email', email);
     body.append('password', password);
-<<<<<<< HEAD
-    return this.http.post(this.baseUrl + '/login', body, {
-=======
     return this.http.post(this.baseUrl + '/login', body,   {
->>>>>>> b58a8aacfd140801545f3c4cd4787adeb6dd8b8b
       responseType: 'json' as 'json'
     });
   }

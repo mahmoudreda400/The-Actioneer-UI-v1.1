@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light fixed-top" style="background:#fff">
+<nav class="navbar navbar-expand-md navbar-light fixed-top" style="background:#eee">
   <div class="row">
     <div class="col-md-1">
       <a routerLink="/"><img src="assets/images/auctioneer.png" width="50" height="50"
@@ -24,7 +24,7 @@
               <option value="statistics">Statistics</option>
               <option value="reports">Reports</option>
               <option value="blockedUsers">Blocked Users</option>
-              <option value="logOut">Logout</option>
+              <option value="logOut" (click)="logout()">Logout</option>
             </select>
 
         </li>

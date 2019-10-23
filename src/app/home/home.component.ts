@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
     imageUrl: ''
   };
 
-  constructor(private apiService:ApiService,private router: Router) {
+  constructor(public apiService:ApiService,private router: Router) {
    }
   ngOnInit() {
     this.initializeLists();
@@ -44,9 +44,9 @@ export class HomeComponent implements OnInit {
     });
   }
   
-  itemAction(obj){
+  itemAction(obj, productId){
     if(obj.target.selectedIndex == 1)
-        this.router.navigate(['/addProduct']);
+        this.router.navigate(['/addProduct'],{queryParams: {id: productId}});
     else if(obj.target.selectedIndex == 2)
         {
             let modal = document.getElementById("myModal");

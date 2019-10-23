@@ -1,3 +1,4 @@
+import { ReportsComponent } from './reports/reports.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
@@ -22,6 +23,9 @@ const routes: Routes = [
   },{
     path:'statistics',
     component: StatisticsComponent
+  },{
+    path:'reports',
+    component: ReportsComponent
   }
 ];
 

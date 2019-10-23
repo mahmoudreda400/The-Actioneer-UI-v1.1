@@ -21,6 +21,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { StatisticsComponent } from './statistics/statistics.component'; 
 import { GoogleChartsModule } from 'angular-google-charts';
 import { ReportsComponent } from './reports/reports.component';
+import { BlockedComponent } from './blocked/blocked.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ReportsComponent } from './reports/reports.component';
     ProductDetailsComponent,
     ProfileComponent,
     StatisticsComponent,
-    ReportsComponent
+    ReportsComponent,
+    BlockedComponent
   ],
   imports: [
     GoogleChartsModule.forRoot(),

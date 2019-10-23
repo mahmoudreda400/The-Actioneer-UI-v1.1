@@ -92,12 +92,32 @@ export class ApiService {
   // });
 
   // }
+  getProfileData(): Observable<any> {
+    const token = localStorage.getItem('token');
+    console.log(token);
+    let headers = new HttpHeaders({
+      'Authorization': token
+    });
+    const options = { responseType: 'json' as 'json', headers };
+    return this.http.get(this.baseUrl + '/profileData', options);
+
+  }
+  setProfileData(person): Observable<any> {
+    const token = localStorage.getItem('token');
+    console.log(token);
+    let headers = new HttpHeaders({
+      'Authorization': token
+    });
+    const options = { responseType: 'json' as 'json', headers };
+    return this.http.post(this.baseUrl + '/updateProfile', person, options);
+
+  }
 
 
   ignoreReports(userId): Observable<any> {
     let body = new FormData();
     body.append('userId', userId);
-    return this.http.post(this.baseUrl + '/ignoreReports', body,   {
+    return this.http.post(this.baseUrl + '/ignoreReports', body, {
       responseType: 'json' as 'json'
     });
   }
@@ -105,11 +125,17 @@ export class ApiService {
   blockUser(userId): Observable<any> {
     let body = new FormData();
     body.append('userId', userId);
-    return this.http.post(this.baseUrl + '/blockUser', body,   {
+    return this.http.post(this.baseUrl + '/blockUser', body, {
       responseType: 'json' as 'json'
     });
   }
-  
+  activate(userId): Observable<any> {
+    let body = new FormData();
+    body.append('userId', userId);
+    return this.http.post(this.baseUrl + '/activate', body,   {
+      responseType: 'json' as 'json'
+    });
+  }
 
   getAllCategories(): Observable<any> {
     return this.http.get(this.baseUrl + '/getAllCategories', {
@@ -122,7 +148,12 @@ export class ApiService {
       responseType: 'json' as 'json'
     });
   }
-
+  loadBlockedUsers(): Observable<any> {
+    return this.http.get(this.baseUrl + '/blocked', {
+      responseType: 'json' as 'json'
+    });
+  }
+  
   savePost(post, images): Observable<any> {
     const token = localStorage.getItem('token');
     let headers = new HttpHeaders({
@@ -139,7 +170,6 @@ export class ApiService {
       }));
     return this.http.post(this.baseUrl + '/addPost', body, options);
   }
-
   updatePost(post, images): Observable<any> {
     const token = localStorage.getItem('token');
     let headers = new HttpHeaders({

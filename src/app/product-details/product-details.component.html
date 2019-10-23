@@ -2,28 +2,28 @@
 
 <div class="row" style="margin:100px ;">
   <div class="col-md-6">
-      <img *ngIf="product.photosURL" width="300px" height="400px" class="img-responsive card-img" [src]="product.photosURL" alt="{{ product.itemName }}">
+      <img *ngIf="product?.photos != null &&product?.photos[0] != null" width="300px" height="400px" class="img-responsive card-img" [src]="product.photos[0].url" >
   </div> 
   <div class="col-md-6">
     <div class="row">
-        <div class="col-md-5 label">Name:</div>
-        <div class="col-md-7"><span >{{product.itemName.toUpperCase()}}</span></div>
+        <div class="col-md-5 label">title:</div>
+        <div class="col-md-7"><span >{{product?.title}}</span></div>
        </div> 
        <div class="row">
           <div class="col-md-5 label">Description:</div>
-          <div class="col-md-7"><span >{{product.itemDescription}}</span></div>
+          <div class="col-md-7"><span >{{product?.description}}</span></div>
          </div> 
          <div class="row">
             <div class="col-md-5 label">Price:</div>
-            <div class="col-md-7"><span >${{product.price}}</span></div>
+            <div class="col-md-7"><span >${{product?.minPrice}}</span></div>
            </div> 
            <div class="row">
               <div class="col-md-5 label">Owner:</div>
-              <div class="col-md-7"><span >{{product.user.name}}</span></div>
+              <div class="col-md-7"><span >{{product?.user?.name}}</span></div>
              </div> 
              <div class="row">
                 <div class="col-md-5 label">Phone:</div>
-                <div class="col-md-7"><span>{{product.user.mobile}}</span></div>
+                <div class="col-md-7"><span>{{product?.user.phone}}</span></div>
                </div> 
               <div class="row">
                 <div class="col-md-6"></div>

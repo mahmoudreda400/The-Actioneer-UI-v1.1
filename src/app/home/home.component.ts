@@ -1,5 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-home',
@@ -27,8 +28,9 @@ export class HomeComponent implements OnInit {
     category: '',
     imageUrl: ''
   };
+  currentProduct: any;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private apiService: ApiService) {
     
    }
   ngOnInit() {
@@ -36,7 +38,8 @@ export class HomeComponent implements OnInit {
     this.getFilteredProducts();
   }
   
-  itemAction(obj){
+  itemAction(obj, product){
+    this.currentProduct = product;
     if(obj.target.selectedIndex == 1)
         this.router.navigate(['/addProduct']);
     else if(obj.target.selectedIndex == 2)
@@ -53,6 +56,15 @@ export class HomeComponent implements OnInit {
   goToDetails(product){
     sessionStorage.setItem('selectedProduct',JSON.stringify(product));
     this.router.navigate(['/productDetails']);
+  }
+
+  reportUser(reportMsg){
+    // alert(reportMsg);
+    // alert(this.currentProduct.price);
+    this.apiService.reportUser(reportMsg, this.currentProduct).subscribe(data => {
+      console.log(data);
+      
+    });
   }
 
 // When the user clicks on <span> (x), close the modal

@@ -76,11 +76,17 @@ export class HomeComponent implements OnInit {
       console.log(data);
       
     });
+    document.getElementById("myModal").style.display = "none";
+    document.getElementById("myModal2").style.display = "block";
   }
 
 // When the user clicks on <span> (x), close the modal
 closeModal() {
   let modal = document.getElementById("myModal");
+  modal.style.display = "none";
+}
+closeModal2() {
+  let modal = document.getElementById("myModal2");
   modal.style.display = "none";
 }
 

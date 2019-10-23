@@ -12,6 +12,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ProductDetailsComponent implements OnInit {
   product :any;
+  biddingValue = 0;
+  biddings: any[] = [];
+  lastBidderName: any = "";
 
   constructor(private router: Router,private activatedRouter: ActivatedRoute,private service:ApiService,private formBuilder: FormBuilder) { }
   imageView;
@@ -21,37 +24,21 @@ export class ProductDetailsComponent implements OnInit {
 
 
   ngOnInit() {
-   // this.product = JSON.parse(sessionStorage.getItem('selectedProduct'));
-    // this.getFilteredProducts();
-   // this.apiService.getPostById
-    //});
     this.activatedRouter.queryParams.subscribe(params => {
       const postId = params['id'];
       this.getPostById(postId);});
   }
-  // createDetailsForm(post) {
-  //   const url = post.photos[0].url;
-  //   const imageName = url.substr(url.lastIndexOf('/') + 1);
-  //   this.uploadedText = imageName;
-  //   this.imageView = null;
-  //   this.postForm = this.formBuilder.group({
-  //     id: [post.id],
-  //     title: [post.title],
-  //     description: [post.description],
-  //     expirDate: [post.expirDate],
-  //     minPrice: [post.minPrice],
-  //     incrValue: [post.incrValue],
-  //     city: [post.city],
-  //     country: [post.country],
-  //     category: [post.category.id],
-  //     photos: [[]]
-
-  //   });
-  // }
+  
   getPostById(id) {
     this.service.getPostById(id).subscribe(data => {
      // this.createDetailsForm(data);
       this.product= data;
+      this.biddingValue = this.product.minPrice + this.product.incrValue;
+      this.biddings = data.biddings;
+      this.biddings.sort(function(a: any,b: any){
+        return b.id - a.id;
+      })
+      this.lastBidderName = this.biddings[0].user.name;
     });
   }
 
@@ -60,8 +47,9 @@ export class ProductDetailsComponent implements OnInit {
     
     let targetProduct = {id: product.id}
     this.service.bid(targetProduct).subscribe(data => {
-      alert(data);
-      this.product = data.body.post;
+      this.product.minPrice = data.price;
+      this.biddingValue = this.product.minPrice + this.product.incrValue;
+      this.lastBidderName = data.user.name;
     });
   }
 

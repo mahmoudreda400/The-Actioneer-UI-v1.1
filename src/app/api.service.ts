@@ -63,7 +63,13 @@ export class ApiService {
       responseType: 'json' as 'json'
     });
   }
-  
+  activate(userId): Observable<any> {
+    let body = new FormData();
+    body.append('userId', userId);
+    return this.http.post(this.baseUrl + '/activate', body,   {
+      responseType: 'json' as 'json'
+    });
+  }
 
   getAllCategories(): Observable<any> {
     return this.http.get(this.baseUrl + '/getAllCategories', {
@@ -76,7 +82,12 @@ export class ApiService {
       responseType: 'json' as 'json'
     });
   }
-
+  loadBlockedUsers(): Observable<any> {
+    return this.http.get(this.baseUrl + '/blocked', {
+      responseType: 'json' as 'json'
+    });
+  }
+  
   savePost(post, images): Observable<any> {
     const token = localStorage.getItem('token');
     console.log(token);

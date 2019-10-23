@@ -15,7 +15,7 @@ selectedIndex;
 
   ngOnInit() {
     this.openNav();
-    this.loadReports();
+    this.loadReports(); 
    
   }
   loadReports(){

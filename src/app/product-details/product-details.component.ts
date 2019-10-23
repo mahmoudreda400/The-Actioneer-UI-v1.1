@@ -8,13 +8,23 @@ import { ApiService } from '../api.service';
 })
 export class ProductDetailsComponent implements OnInit {
   product :any;
-  constructor(private apiService:ApiService) { }
+  constructor(private service: ApiService) { }
 
   ngOnInit() {
     this.product = JSON.parse(sessionStorage.getItem('selectedProduct'));
     // this.getFilteredProducts();
    // this.apiService.getPostById
     //});
+  }
+
+  bid(product){
+    console.log(product);
+    
+    let targetProduct = {id: product.id}
+    this.service.bid(targetProduct).subscribe(data => {
+      alert(data);
+      this.product = data.body.post;
+    });
   }
 
 }

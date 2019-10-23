@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,10 +8,20 @@ import { Observable } from 'rxjs';
 export class ApiService {
 
 
-  baseUrl = "http://localhost:8085";
+  ip = "http://localhost";
+  baseUrl = this.ip + ":8085";
 
   constructor(private http: HttpClient) { }
 
+  getPhotoUrl(url) {
+    console.log('> >> url : ', url);
+    if (url != null) {
+      let imagePath = url.substr(url.indexOf('/auctioneer')).replace(' ', '%20');
+      console.log(' >>> url.substr: ', imagePath);
+      console.log(' >> final url  : ', this.ip + imagePath);
+      return this.ip + imagePath;
+    }
+  }
   register(person): Observable<any> {
     return this.http.post(this.baseUrl + '/register', person, {
       responseType: 'text' as 'json'
@@ -31,9 +41,45 @@ export class ApiService {
       responseType: 'json' as 'json'
     });
   }
+
+  bid(product) :Observable<any>{
+    let token = localStorage.getItem("token");
+
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': token,
+      'responseType': 'json' as 'json' });
+
+    let options = { headers: headers };
+    
+    return this.http.post(this.baseUrl + '/api/bidding/bid', product, options);
+  }
+
+  reportUser(msg: string, reported) {
+    //TODO fixme
+    reported = {id: 1};
+    // let token = localStorage.getItem("token") || "";
+
+    // let headers = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    //   'Authorization': token });
+
+    // let options = { responseType: 'json' as 'json',
+    // headers: headers };
+
+    let body = new FormData();
+    body.append("msg", msg);
+    body.append("reported", new Blob([JSON.stringify(reported)],
+      {
+        type: "application/json"
+      }
+    ));
+
+    return this.http.post(this.baseUrl + '/reportUser', body);
+  }
   getPostById(id): Observable<any> {
 
-    return this.http.get(this.baseUrl + '/posts/' + '${id}', { responseType: 'json' as 'json' });
+    return this.http.get(this.baseUrl + '/posts/' + id, { responseType: 'json' as 'json' });
 
 
   }
@@ -90,11 +136,6 @@ export class ApiService {
   
   savePost(post, images): Observable<any> {
     const token = localStorage.getItem('token');
-    console.log(token);
-    // let headers = new HttpHeaders({
-    //   'Authorization': token,
-    //   'responseType': 'json'
-    // });
     let headers = new HttpHeaders({
       'Authorization': token
     });
@@ -108,5 +149,26 @@ export class ApiService {
         type: "application/json"
       }));
     return this.http.post(this.baseUrl + '/addPost', body, options);
+  }
+
+  updatePost(post, images): Observable<any> {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders({
+      'Authorization': token
+    });
+    const options = { responseType: 'text' as 'json', headers };
+    let body = new FormData();
+    if (images != null) {
+      for (let image of images) {
+        body.append('images', image);
+      }
+    } else {
+      body.append('images', null);
+    }
+    body.append("post", new Blob([JSON.stringify(post)],
+      {
+        type: "application/json"
+      }));
+    return this.http.post(this.baseUrl + '/updatePost', body, options);
   }
 }

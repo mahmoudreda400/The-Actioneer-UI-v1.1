@@ -14,10 +14,11 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getPhotoUrl(url) {
-    if (url != null) {
-      let imagePath = url.substr(url.indexOf('/auctioneer')).replace(' ', '%20');
-      return this.ip + imagePath;
-    }
+    // if (url != null) {
+    //   let imagePath = url.substr(url.indexOf('/auctioneer')).replace(' ', '%20');
+    //   return this.ip + imagePath;
+    // }
+    return url;
   }
   register(person): Observable<any> {
     return this.http.post(this.baseUrl + '/register', person, {

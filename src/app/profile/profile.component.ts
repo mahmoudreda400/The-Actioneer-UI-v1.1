@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
   constructor(private apiService:ApiService,private formBuilder: FormBuilder ) { 
   }
   ngOnInit() {
+    var element = document.getElementsByClassName("active");
     this.getProfileData();
   }
   createprofileForm(user) {

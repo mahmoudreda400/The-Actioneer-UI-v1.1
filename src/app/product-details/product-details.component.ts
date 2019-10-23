@@ -59,7 +59,7 @@ export class ProductDetailsComponent implements OnInit {
     console.log('>> bid on: ',product);
     
     let targetProduct = {id: product.id}
-    this.service.bid(product).subscribe(data => {
+    this.service.bid(targetProduct).subscribe(data => {
       alert(data);
       this.product = data.body.post;
     });

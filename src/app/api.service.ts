@@ -40,22 +40,23 @@ export class ApiService {
     });
   }
 
-  bid(product) :Observable<any>{
+  bid(product): Observable<any> {
     let token = localStorage.getItem("token");
 
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': token,
-      'responseType': 'json' as 'json' });
+      'responseType': 'json' as 'json'
+    });
 
     let options = { headers: headers };
-    
+
     return this.http.post(this.baseUrl + '/api/bidding/bid', product, options);
   }
 
   reportUser(msg: string, reported) {
     //TODO fixme
-    reported = {id: 1};
+    reported = { id: 1 };
     // let token = localStorage.getItem("token") || "";
 
     // let headers = new HttpHeaders({
@@ -130,7 +131,7 @@ export class ApiService {
   activate(userId): Observable<any> {
     let body = new FormData();
     body.append('userId', userId);
-    return this.http.post(this.baseUrl + '/activate', body,   {
+    return this.http.post(this.baseUrl + '/activate', body, {
       responseType: 'json' as 'json'
     });
   }
@@ -151,7 +152,7 @@ export class ApiService {
       responseType: 'json' as 'json'
     });
   }
-  
+
   savePost(post, images): Observable<any> {
     const token = localStorage.getItem('token');
     let headers = new HttpHeaders({
@@ -189,9 +190,17 @@ export class ApiService {
     return this.http.post(this.baseUrl + '/updatePost', body, options);
   }
 
-  adminStatistics(): Observable<any>{
-    return this.http.get(this.baseUrl+'/admin/stat', {
+  adminStatistics(): Observable<any> {
+    return this.http.get(this.baseUrl + '/admin/stat', {
       responseType: 'json' as 'json'
     });
+  }
+  getUserNotifications(): Observable<any> {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders({
+      'Authorization': token
+    });
+    const options = { responseType: 'json' as 'json', headers };
+    return this.http.get(this.baseUrl + '/getNotifications', options);
   }
 }

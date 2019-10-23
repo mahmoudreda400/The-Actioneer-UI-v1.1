@@ -121,6 +121,7 @@ export class HeaderComponent implements OnInit {
     this.loginShow = !this.loginShow;
   }
   logout() { 
+    this.appUser = null; 
     console.log('>>>> logout')
     localStorage.removeItem('token');
     localStorage.removeItem('type');

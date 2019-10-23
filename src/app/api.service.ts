@@ -14,11 +14,8 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getPhotoUrl(url) {
-    console.log('> >> url : ', url);
     if (url != null) {
       let imagePath = url.substr(url.indexOf('/auctioneer')).replace(' ', '%20');
-      console.log(' >>> url.substr: ', imagePath);
-      console.log(' >> final url  : ', this.ip + imagePath);
       return this.ip + imagePath;
     }
   }

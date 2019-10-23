@@ -1,5 +1,8 @@
 <app-header></app-header>
-<div class="container" style="margin:100px" *ngIf="profileForm != null">
+<div class="row" style="padding: 0px;margin: 0px;padding-top: 30px;">
+      <img src="assets/images/banner5.png" width="100%" height="260" >
+    </div>
+<div class="container" *ngIf="profileForm != null">
   <form [formGroup]="profileForm" class="form-group" (ngSubmit)="SaveProfileData()" *ngIf="!loginShow">
     <div class="row">
       <div class="col-md-3 pull-right">name</div>

@@ -25,7 +25,7 @@ export class StatisticsComponent implements OnInit {
   }
   
   lineChart = {
-    title : 'Users Signed Up last 5 Months',
+    title : 'Posts last 5 Months',
    type : 'LineChart',
    data : [
       ['May', 2000],
@@ -34,7 +34,7 @@ export class StatisticsComponent implements OnInit {
       ['Augest', 10000],
       ['September', 12000],
    ],
-   columnNames : ['Month', 'Users'],
+   columnNames : ['Month', 'Posts'],
    options : {},
    width : 600,
    height : 300
@@ -85,9 +85,19 @@ this.Cities = [
       console.log("statistcs: ", data)
       this.statistics = data;
       this.pieChart.data = this.statistics.postsPerCategory;
-      this.lineChart.data = this.statistics.postsPerMonth;
+      this.lineChart.data = this.replaceItemsByMonths(this.statistics.postsPerMonth);
       this.barChart.data = this.statistics.postsPerUser;
     })
+  }
+  monthArr =["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  replaceItemsByMonths(arr){
+    arr.sort();
+    arr.sort(function(a, b){return a[0] - b[0]});
+    for (let i = 0;i < arr.length;i++)
+    {
+      arr[i][0] = this.monthArr[arr[i][0]];
+    }
+    return arr;
   }
 
 

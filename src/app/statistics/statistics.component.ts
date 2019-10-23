@@ -11,19 +11,19 @@ export class StatisticsComponent implements OnInit {
 
   statistics: any = {
     postsPerMonth: [],
-    postsPerCategory: [{"":1}],
+    postsPerCategory: [],
     postsPerUser: []
   };
-
   pieChart = {
     title : 'Posts distributed as Categories',
    type : 'PieChart',
-   data : this.statistics.postsPerCategory[0],
+   data : this.statistics.postsPerCategory,
    columnNames : ['Category', 'Percentage'],
    options : {},
    width : 600,
    height : 300
   }
+  
   lineChart = {
     title : 'Users Signed Up last 5 Months',
    type : 'LineChart',
@@ -84,6 +84,9 @@ this.Cities = [
     this.apiService.adminStatistics().subscribe(data => {
       console.log("statistcs: ", data)
       this.statistics = data;
+      this.pieChart.data = this.statistics.postsPerCategory;
+      this.lineChart.data = this.statistics.postsPerMonth;
+      this.barChart.data = this.statistics.postsPerUser;
     })
   }
 

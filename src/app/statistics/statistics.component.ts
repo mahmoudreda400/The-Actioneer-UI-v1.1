@@ -1,5 +1,6 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-statistics',
@@ -8,16 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatisticsComponent implements OnInit {
 
+  statistics: any = {
+    postsPerMonth: [],
+    postsPerCategory: [{"":1}],
+    postsPerUser: []
+  };
+
   pieChart = {
     title : 'Posts distributed as Categories',
    type : 'PieChart',
-   data : [
-      ['CARS', 12.0],
-      ['ELECTRONICS', 26.8],
-      ['SPORTS', 35.8],
-      ['MOVIES', 8.5],
-      ['HOUSING', 16.9]
-   ],
+   data : this.statistics.postsPerCategory[0],
    columnNames : ['Category', 'Percentage'],
    options : {},
    width : 600,
@@ -67,7 +68,8 @@ export class StatisticsComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private apiService: ApiService) {
     //this.categories$ = categoryService.getAll();
 this.Cities = [
       {id:1,Name:'FairField'},
@@ -79,6 +81,10 @@ this.Cities = [
   }
 
   ngOnInit() {
+    this.apiService.adminStatistics().subscribe(data => {
+      console.log("statistcs: ", data)
+      this.statistics = data;
+    })
   }
 
 

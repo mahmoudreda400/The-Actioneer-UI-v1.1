@@ -192,4 +192,10 @@ export class ApiService {
       }));
     return this.http.post(this.baseUrl + '/updatePost', body, options);
   }
+
+  adminStatistics(): Observable<any>{
+    return this.http.get(this.baseUrl+'/admin/stat', {
+      responseType: 'json' as 'json'
+    });
+  }
 }

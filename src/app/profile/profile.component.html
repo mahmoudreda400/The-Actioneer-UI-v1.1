@@ -1,31 +1,42 @@
 <app-header></app-header>
-<div class="container" style="margin:100px">
-  <form class="form-group" (ngSubmit)="loginUser(f.value)" *ngIf="!loginShow" class="login-form">
-      <div class="row">
-          <div class="col-md-3 pull-right">Name</div> 
-          <div class="col-md-6">
-            <input class="form-control" id="name" name="name" type="text" placeholder="name" required/>
-          </div> 
-        </div>
-        <div class="row">
-          <div class="col-md-3 pull-right">Phone</div> 
-          <div class="col-md-6">
-            <input class="form-control" id="phone" name="phone" type="text" placeholder="phone" required/>
-          </div> 
-        </div>
-<div class="row">
-   <div class="col-md-3 pull-right">Email</div> 
-   <div class="col-md-6">
-    <input class="form-control" id="email" name="email" type="text" placeholder="username" required/>
-   </div> 
-</div>
-<div class="row">
-  <div class="col-md-3 pull-right">Address</div> 
-  <div class="col-md-6">
-    <input class="form-control" id="Address" name="Address" placeholder="Address" required/>
-  </div> 
-</div>
+<div class="container" style="margin:100px" *ngIf="profileForm != null">
+  <form [formGroup]="profileForm" class="form-group" (ngSubmit)="SaveProfileData()" *ngIf="!loginShow">
+    <div class="row">
+      <div class="col-md-3 pull-right">name</div>
+      <div class="col-md-6">
+        <input class="form-control" id="name" name="name" formControlName="name" type="text" placeholder="maiada"
+           required />
+        <!-- <div *ngIf="submitted && profileForm.controls.name.errors" class="error-msg">
+          <div *ngIf="profileForm.controls.name.errors.required">Name is required</div> -->
+        <!-- </div> -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 pull-right">Phone</div>
+      <div class="col-md-6">
+        <input class="form-control" id="phone" name="phone" formControlName="phone" type="text" placeholder="phone" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 pull-right">email</div>
+      <div class="col-md-6">
+        <input class="form-control" id="email" name="email" formControlName="email" type="text" placeholder="email"
+          required />
+        <!-- <div *ngIf="submitted && profileForm.controls.email.errors" class="error-msg">
+          <div *ngIf="profileForm.controls.email.errors.required">Name is required</div>
 
-    <button class="btn btn-primary pull-right">Edit Profile</button>
+        </div> -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 pull-right">Address</div>
+      <div class="col-md-6">
+        <input class="form-control" id="address" name="address" formControlName="address" placeholder="address"
+          required />
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary pull-right">Edit Profile</button>
   </form>
+  <div class="error-msg">{{msg}}</div>
 </div>

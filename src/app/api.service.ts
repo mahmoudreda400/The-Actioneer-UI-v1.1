@@ -26,18 +26,7 @@ export class ApiService {
       responseType: 'json' as 'json'
     });
   }
-<<<<<<< HEAD
-  getAllPost() :Observable<any>{
-    return this.http.get(this.baseUrl + '/Allposts',    {
-      responseType: 'json' as 'json'
-    });
-  }
-  getPostById(id):Observable<any>{
-    
-    return this.http.get(this.baseUrl+'/posts/'+'${id}',{responseType: 'json' as 'json'}) ;
-
-
-}
+ 
 // getProfileData(token):Observable<any>
 // {
   // let header = new HttpHeaders();
@@ -47,9 +36,40 @@ export class ApiService {
   // });
 
 // }
+getProfileData(): Observable<any> {
+  const token = localStorage.getItem('token');
+    console.log(token);
+    let headers = new HttpHeaders({
+      'Authorization': token
+    });
+    const options = { responseType: 'json' as 'json', headers };
+    return this.http.get(this.baseUrl + '/profileData', options);
 
-=======
+}
+setProfileData(person):Observable<any> {
+  const token = localStorage.getItem('token');
+    console.log(token);
+    let headers = new HttpHeaders({
+      'Authorization': token
+    });
+    const options = { responseType: 'json' as 'json', headers };
+    return this.http.post(this.baseUrl + '/updateProfile', person, options);
 
+    
+    
+}
+
+getAllPost() :Observable<any>{
+  return this.http.get(this.baseUrl + '/Allposts',    {
+    responseType: 'json' as 'json'
+  });
+}
+getPostById(id):Observable<any>{
+  
+  return this.http.get(this.baseUrl+'/posts/'+'${id}',{responseType: 'json' as 'json'}) ;
+
+
+}
   getAllCategories(): Observable<any> {
     return this.http.get(this.baseUrl + '/getAllCategories', {
       responseType: 'json' as 'json'
@@ -77,5 +97,4 @@ export class ApiService {
       }));
     return this.http.post(this.baseUrl + '/addPost', body, options);
   }
->>>>>>> 85d237345f2ff4e5f7b27ac971d2a2c94c63e21a
 }

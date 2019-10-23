@@ -58,8 +58,31 @@ export class ApiService {
   // }
 
 
+  ignoreReports(userId): Observable<any> {
+    let body = new FormData();
+    body.append('userId', userId);
+    return this.http.post(this.baseUrl + '/ignoreReports', body,   {
+      responseType: 'json' as 'json'
+    });
+  }
+
+  blockUser(userId): Observable<any> {
+    let body = new FormData();
+    body.append('userId', userId);
+    return this.http.post(this.baseUrl + '/blockUser', body,   {
+      responseType: 'json' as 'json'
+    });
+  }
+  
+
   getAllCategories(): Observable<any> {
     return this.http.get(this.baseUrl + '/getAllCategories', {
+      responseType: 'json' as 'json'
+    });
+  }
+
+  getAllReports(): Observable<any> {
+    return this.http.get(this.baseUrl + '/reports', {
       responseType: 'json' as 'json'
     });
   }

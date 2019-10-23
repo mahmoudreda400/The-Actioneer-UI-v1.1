@@ -1,0 +1,105 @@
+.tab{
+    border: 1px solid #19497A;
+}
+.reportTab{
+    padding: 30px;
+    font-size: 24px;
+    text-align: center;
+    font-family: fantasy;
+}
+h3{
+    font-family: fantasy;
+}
+.reportTab:hover{
+    background-color: aqua;
+}
+.leftMenu{
+    height: 500px;
+    overflow-y: auto;
+}
+.selectedTab{
+    background-color: #3690BB;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+  }
+
+  button{
+      width: 100px;
+      margin-right: 10px;
+  }
+  
+  .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #19497A;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+//custom list
+
+ol {
+    list-style: none;
+    counter-reset: my-awesome-counter;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 20px;
+  }
+  ol li {
+    counter-increment: my-awesome-counter;
+    display: flex;
+    width: 50%;
+    font-size: 1rem;
+    color: #19497A;
+    margin-bottom: 0.5rem;
+    padding: 10px;
+  }
+  ol li::before {
+    content: "0" counter(my-awesome-counter);
+    font-weight: bold;
+    font-size: 3.5rem;
+    margin-right: 0.5rem;
+    font-family: 'Abril Fatface', serif;
+    line-height: 1;
+  }
+  
+  
+  
+  body {
+    padding: 1rem;
+    font-family: sans-serif;
+  }
+  

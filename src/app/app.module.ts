@@ -20,6 +20,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { ProfileComponent } from './profile/profile.component';
 import { StatisticsComponent } from './statistics/statistics.component'; 
 import { GoogleChartsModule } from 'angular-google-charts';
+import { ReportsComponent } from './reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { GoogleChartsModule } from 'angular-google-charts';
     AdminBlockedUsersComponent,
     ProductDetailsComponent,
     ProfileComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    ReportsComponent
   ],
   imports: [
     GoogleChartsModule.forRoot(),

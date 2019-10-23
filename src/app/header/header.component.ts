@@ -68,8 +68,10 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/profile']);
     else if(obj.target.selectedIndex == 2)
     this.router.navigate(['/statistics']);
-    else if(obj.target.selectedIndex == 25)
+    else if(obj.target.selectedIndex == 5)
     this.logout();
+    else if(obj.target.selectedIndex == 3)
+    this.router.navigate(['/reports']);
 
   }
 

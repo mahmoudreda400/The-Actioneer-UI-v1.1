@@ -1,66 +1,49 @@
-<nav class="navbar navbar-expand-md navbar-light fixed-top" style="background:#eee">
-  <div class="row">
-    <div class="col-md-1">
-      <a routerLink="/"><img src="assets/images/auctioneer.png" width="50" height="50"
-          style="margin-left:20px;margin-right:20px" /></a>
-    </div>
-    <div class="collapse navbar-collapse col-md-11" style="padding-top: 20px;" id="navbarsExampleDefault">
+<ul>
+    <li><a id="homeScreen" class="active" routerLink="/">Home</a></li>
+    <li *ngIf="appUser"><a id="profileScreen" routerLink="/profile">Profile</a></li>
+    <li *ngIf="appUser"><a id="sellScreen" routerLink="/addProduct">Sell Your Staff</a></li>
+    <li class="credential" *ngIf="!appUser"><a href="#" (click)="showLogin()">Login</a></li>
+    <li *ngIf="appUser && appUser.type == 'admin'"><a routerLink="/statistics" >Statistics</a></li>
+    <li *ngIf="appUser && appUser.type == 'admin'"><a id="reportsScreen" routerLink="/reports" >Reports</a></li>
+    <li *ngIf="appUser && appUser.type == 'admin'"><a id="blockedScreen" routerLink="/blocked" >Blocked Users</a></li>
+    <li class="credential" *ngIf="appUser"><a href="#"  (click)="logout()"> Logout </a></li>
+    <li class="credential" *ngIf="appUser"><a href="#" >{{ appUser.name }}</a></li>
 
-      <ul class="navbar-nav">
-        <ng-template #anonymousUser>
-          <li class="nav-item">
-            <a class="simpleBtn" (click)="showLogin()">Log In</a>
+    <li *ngIf="appUser" class="nav-item dropdown credential">
+      <a href="#" class="notification" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        <span class="fa fa-bell fa-2x"></span>
+        <span class="badge" >{{notifications.length}}</span>
+      </a>
+      <div class="dropdown-content" *ngFor="let not of notifications">
+        <a>You Got An Item: {{not.post.title}}<br> price{{not.price}}</a>
+      </div>
+    
+    </li>
+    
+    
+  </ul>
+
+   <div class="collapse navbar-collapse" id="navbarSupportedContent-5">
+       
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+          <li class="nav-item avatar dropdown">
+            <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <span class="badge badge-danger ml-2">4</span>
+              <i class="fas fa-bell"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-5">
+              <a class="dropdown-item waves-effect waves-light" href="#">Action <span class="badge badge-danger ml-2">4</span></a>
+              <a class="dropdown-item waves-effect waves-light" href="#">Another action <span class="badge badge-danger ml-2">1</span></a>
+              <a class="dropdown-item waves-effect waves-light" href="#">Something else here <span class="badge badge-danger ml-2">4</span></a>
+            </div>
           </li>
-        </ng-template>
-        <li *ngIf="appUser; else anonymousUser" class="nav-item dropdown">
-          <div>
-            {{ appUser.name }}{{ appUser.firstName }} {{ appUser.lastName }}
-          </div>
-        </li>
-        <li *ngIf="appUser" class="nav-item dropdown">
-          <select id="userActions" (change)="userAction($event)" class="form-control" style="width: 20px;height: 20px">
-              <option value="none"></option>
-              <option value="profile"> Profile</option>
-              <option value="statistics">Statistics</option>
-              <option value="reports">Reports</option>
-              <option value="blockedUsers">Blocked Users</option>
-              <option value="logOut" (click)="logout()">Logout</option>
-            </select>
-
-        </li>
-        <li *ngIf="appUser" class="nav-item dropdown" style="margin-right: 10px">
-          <a href="#" class="notification">
-            <span class="fa fa-bell fa-2x"></span>
-            <span class="badge">3</span>
-          </a>
-          <div class="dropdown-content">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <input class="Search" type="text" placeholder="Search">
-        </li>
-
-        <li class="nav-item" style="margin-left: 20px">
-          <a style="color: #fff" class="actionBtn" routerLink="/addProduct">Sell Your Staff</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
+        </ul>
+      </div>
+  
 <main role="main" class="container">
-
-  <!-- <div class="starter-template">
-    <h1>MO Shop</h1>
-  </div> -->
-
 </main>
 <div id="loginModal" class="modal">
 
-  <!-- Modal content -->
   <div class="form">
     <span (click)="closeModal()" class="close pull-right" style="margin-right:-40px;margin-top: -40px">&times;</span>
     <form [formGroup]="registerForm" (ngSubmit)="register()" *ngIf="loginShow" class="login-form">

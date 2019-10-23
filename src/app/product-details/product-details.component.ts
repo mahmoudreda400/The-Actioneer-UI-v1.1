@@ -16,7 +16,7 @@ export class ProductDetailsComponent implements OnInit {
   biddings: any[] = [];
   lastBidderName: any = "";
 
-  constructor(private router: Router,private activatedRouter: ActivatedRoute,private service:ApiService,private formBuilder: FormBuilder) { }
+  constructor(private router: Router,private activatedRouter: ActivatedRoute,public service:ApiService,private formBuilder: FormBuilder) { }
   imageView;
   uploadedText = 'Choose file';
   id;
@@ -43,7 +43,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   bid(product){
-    console.log(product);
+    console.log('>> bid on: ',product);
     
     let targetProduct = {id: product.id}
     this.service.bid(targetProduct).subscribe(data => {

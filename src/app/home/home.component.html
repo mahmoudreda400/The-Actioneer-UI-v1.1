@@ -48,7 +48,7 @@
       <div class="row" >
         <ng-container *ngFor="let product of filteredProducts; let i = index">
          
-          <div class="col-lg-2" style="padding-right: 10px;padding-left: 10px;" *ngIf="product?.photos != null &&product?.photos[0] != null">
+          <div class="col-lg-2" style="padding-right: 10px;padding-left: 10px;" *ngIf="product?.photos != null &&product?.photos[0] != null" >
             <div >
               
               <div *ngIf="product.title" class="cardd">
@@ -63,7 +63,7 @@
                         </select>
                   </div>
                 </div>
-                <img  class="img-responsive card-img" (click)="goToDetails(product)" [src]="apiService.getPhotoUrl(product.photos[0].url)">
+                <img  class="img-responsive card-img" (click)="postDetails(product.id)" [src]="apiService.getPhotoUrl(product.photos[0].url)">
                 <div class="card-body">
                   <p class="card-text">{{ product.minPrice | currency:'USD':true }}</p>
                 </div>

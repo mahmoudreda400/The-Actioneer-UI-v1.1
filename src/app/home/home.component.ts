@@ -43,7 +43,9 @@ export class HomeComponent implements OnInit {
       this.filteredProducts= data;
     });
   }
-  
+  postDetails(productId){
+    this.router.navigate(['/productDetails'],{queryParams:{id:productId}});
+  }
   itemAction(obj, productId){
     if(obj.target.selectedIndex == 1)
         this.router.navigate(['/addProduct'],{queryParams: {id: productId}});

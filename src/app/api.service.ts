@@ -124,7 +124,6 @@ export class ApiService {
       }));
     return this.http.post(this.baseUrl + '/addPost', body, options);
   }
-
   updatePost(post, images): Observable<any> {
     const token = localStorage.getItem('token');
     let headers = new HttpHeaders({

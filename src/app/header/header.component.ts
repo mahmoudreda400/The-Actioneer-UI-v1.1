@@ -68,6 +68,8 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/profile']);
     else if(obj.target.selectedIndex == 2)
     this.router.navigate(['/statistics']);
+    else if(obj.target.selectedIndex == 25)
+    this.logout();
 
   }
 
@@ -115,7 +117,8 @@ export class HeaderComponent implements OnInit {
   toggle() {
     this.loginShow = !this.loginShow;
   }
-  logout() {
+  logout() { 
+    console.log('>>>> logout')
     localStorage.removeItem('token');
     localStorage.removeItem('type');
     localStorage.removeItem('name');

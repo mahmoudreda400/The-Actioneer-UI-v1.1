@@ -8,10 +8,20 @@ import { Observable } from 'rxjs';
 export class ApiService {
 
 
-  baseUrl = "http://localhost:8085";
+  ip = "http://localhost";
+  baseUrl = this.ip + ":8085";
 
   constructor(private http: HttpClient) { }
 
+  getPhotoUrl(url) {
+    console.log('> >> url : ', url);
+    if (url != null) {
+      let imagePath = url.substr(url.indexOf('/auctioneer')).replace(' ', '%20');
+      console.log(' >>> url.substr: ', imagePath);
+      console.log(' >> final url  : ', this.ip + imagePath);
+      return this.ip + imagePath;
+    }
+  }
   register(person): Observable<any> {
     return this.http.post(this.baseUrl + '/register', person, {
       responseType: 'text' as 'json'
@@ -33,7 +43,7 @@ export class ApiService {
   }
   getPostById(id): Observable<any> {
 
-    return this.http.get(this.baseUrl + '/posts/' + '${id}', { responseType: 'json' as 'json' });
+    return this.http.get(this.baseUrl + '/posts/' + id, { responseType: 'json' as 'json' });
 
 
   }
@@ -56,11 +66,6 @@ export class ApiService {
 
   savePost(post, images): Observable<any> {
     const token = localStorage.getItem('token');
-    console.log(token);
-    // let headers = new HttpHeaders({
-    //   'Authorization': token,
-    //   'responseType': 'json'
-    // });
     let headers = new HttpHeaders({
       'Authorization': token
     });
@@ -74,5 +79,26 @@ export class ApiService {
         type: "application/json"
       }));
     return this.http.post(this.baseUrl + '/addPost', body, options);
+  }
+
+  updatePost(post, images): Observable<any> {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders({
+      'Authorization': token
+    });
+    const options = { responseType: 'text' as 'json', headers };
+    let body = new FormData();
+    if (images != null) {
+      for (let image of images) {
+        body.append('images', image);
+      }
+    } else {
+      body.append('images', null);
+    }
+    body.append("post", new Blob([JSON.stringify(post)],
+      {
+        type: "application/json"
+      }));
+    return this.http.post(this.baseUrl + '/updatePost', body, options);
   }
 }

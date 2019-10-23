@@ -1,3 +1,4 @@
+import { BlockedComponent } from './blocked/blocked.component';
 import { ReportsComponent } from './reports/reports.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -26,6 +27,9 @@ const routes: Routes = [
   },{
     path:'reports',
     component: ReportsComponent
+  },{
+    path:'blocked',
+    component: BlockedComponent
   }
 ];
 

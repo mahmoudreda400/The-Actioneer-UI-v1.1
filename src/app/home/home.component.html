@@ -56,7 +56,7 @@
                 <div class="row" >
                   <div class="col-md-8">{{product?.user?.name}}</div>
                   <div class="col-md-4">
-                      <select (change)="itemAction($event,product.id)" id="menuActions"  class="form-control" style="width: 20px;height: 20px">
+                      <select (change)="itemAction($event, product)" id="menuActions"  class="form-control" style="width: 20px;height: 20px">
                           <option value="none"></option>
                           <option value="edit"> <a style="color: #fff" class="actionBtn" class="actionBtn">Edit Post</a></option> 
                           <option value="report">Report User</option>
@@ -82,8 +82,9 @@
     <div class="modal-content" style="padding-top: 10px;">
         <span (click)="closeModal()" class="close pull-right" style="position: absolute;right: 10px;">&times;</span>
         <h2 style="text-align: center;">report User</h2>
-        <textarea class="form-control" cols="10" rows="6" placeholder="Enter your report here"></textarea>
-        <button class="btn btn-primary pull-right" style="width: 100px;margin-top: 10px;margin-left: 500px;">Submit</button>
+        <textarea class="form-control" cols="10" rows="6" placeholder="Enter your report here" #reportMsg></textarea>
+        <button class="btn btn-primary pull-right" style="width: 100px;margin-top: 10px;margin-left: 500px;"
+        (click)="reportUser(reportMsg.value)">Submit</button>
     </div>
   
   </div>

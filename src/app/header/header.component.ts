@@ -72,7 +72,8 @@ export class HeaderComponent implements OnInit {
     this.logout();
     else if(obj.target.selectedIndex == 3)
     this.router.navigate(['/reports']);
-
+    else if(obj.target.selectedIndex == 4)
+    this.router.navigate(['/blocked']);
   }
 
   goToProfile(){

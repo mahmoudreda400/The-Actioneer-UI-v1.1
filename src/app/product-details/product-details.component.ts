@@ -13,7 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ProductDetailsComponent implements OnInit {
   product :any;
 
-  constructor(private router: Router,private activatedRouter: ActivatedRoute,private apiService:ApiService,private formBuilder: FormBuilder) { }
+  constructor(private router: Router,private activatedRouter: ActivatedRoute,private service:ApiService,private formBuilder: FormBuilder) { }
   imageView;
   uploadedText = 'Choose file';
   id;
@@ -49,9 +49,19 @@ export class ProductDetailsComponent implements OnInit {
   //   });
   // }
   getPostById(id) {
-    this.apiService.getPostById(id).subscribe(data => {
+    this.service.getPostById(id).subscribe(data => {
      // this.createDetailsForm(data);
       this.product= data;
+    });
+  }
+
+  bid(product){
+    console.log(product);
+    
+    let targetProduct = {id: product.id}
+    this.service.bid(targetProduct).subscribe(data => {
+      alert(data);
+      this.product = data.body.post;
     });
   }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -40,6 +40,42 @@ export class ApiService {
     return this.http.get(this.baseUrl + '/Allposts', {
       responseType: 'json' as 'json'
     });
+  }
+
+  bid(product) :Observable<any>{
+    let token = localStorage.getItem("token");
+
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': token,
+      'responseType': 'json' as 'json' });
+
+    let options = { headers: headers };
+    
+    return this.http.post(this.baseUrl + '/api/bidding/bid', product, options);
+  }
+
+  reportUser(msg: string, reported) {
+    //TODO fixme
+    reported = {id: 1};
+    // let token = localStorage.getItem("token") || "";
+
+    // let headers = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    //   'Authorization': token });
+
+    // let options = { responseType: 'json' as 'json',
+    // headers: headers };
+
+    let body = new FormData();
+    body.append("msg", msg);
+    body.append("reported", new Blob([JSON.stringify(reported)],
+      {
+        type: "application/json"
+      }
+    ));
+
+    return this.http.post(this.baseUrl + '/reportUser', body);
   }
   getPostById(id): Observable<any> {
 
@@ -93,8 +129,13 @@ export class ApiService {
       responseType: 'json' as 'json'
     });
   }
-
-
+  activate(userId): Observable<any> {
+    let body = new FormData();
+    body.append('userId', userId);
+    return this.http.post(this.baseUrl + '/activate', body,   {
+      responseType: 'json' as 'json'
+    });
+  }
 
   getAllCategories(): Observable<any> {
     return this.http.get(this.baseUrl + '/getAllCategories', {
@@ -107,7 +148,12 @@ export class ApiService {
       responseType: 'json' as 'json'
     });
   }
-
+  loadBlockedUsers(): Observable<any> {
+    return this.http.get(this.baseUrl + '/blocked', {
+      responseType: 'json' as 'json'
+    });
+  }
+  
   savePost(post, images): Observable<any> {
     const token = localStorage.getItem('token');
     let headers = new HttpHeaders({

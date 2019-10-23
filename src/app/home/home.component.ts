@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
     category: '',
     imageUrl: ''
   };
+  currentProduct: any;
 
   constructor(public apiService:ApiService,private router: Router) {
    }
@@ -46,9 +47,12 @@ export class HomeComponent implements OnInit {
   postDetails(productId){
     this.router.navigate(['/productDetails'],{queryParams:{id:productId}});
   }
-  itemAction(obj, productId){
+ 
+  
+  itemAction(obj, product){
+    this.currentProduct = product;
     if(obj.target.selectedIndex == 1)
-        this.router.navigate(['/addProduct'],{queryParams: {id: productId}});
+        this.router.navigate(['/addProduct'],{queryParams: {id: product.id}});
     else if(obj.target.selectedIndex == 2)
         {
             let modal = document.getElementById("myModal");
@@ -63,6 +67,15 @@ export class HomeComponent implements OnInit {
   goToDetails(product){
     sessionStorage.setItem('selectedProduct',JSON.stringify(product));
     this.router.navigate(['/productDetails']);
+  }
+
+  reportUser(reportMsg){
+    // alert(reportMsg);
+    // alert(this.currentProduct.price);
+    this.apiService.reportUser(reportMsg, this.currentProduct).subscribe(data => {
+      console.log(data);
+      
+    });
   }
 
 // When the user clicks on <span> (x), close the modal

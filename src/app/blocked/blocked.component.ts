@@ -13,7 +13,7 @@ export class BlockedComponent implements OnInit {
   ngOnInit() {
     this.loadBlockedUsers();
   }
-  loadBlockedUsers(){
+  loadBlockedUsers(){ 
     this.apiService.loadBlockedUsers().subscribe(data => {
       console.log('>>> register fata : ', data);
       this.blockedUsers= data;

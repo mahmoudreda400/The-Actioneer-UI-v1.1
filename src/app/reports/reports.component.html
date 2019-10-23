@@ -1,0 +1,17 @@
+<app-header></app-header>
+<div id="mySidenav" class="sidenav" style="padding-top: 100px;">
+    <a (click)="selectReport(report,i)" *ngFor="let report of reports; let i = index">
+            {{report.name}}
+    </a> 
+  </div>
+  <div *ngIf="selectedReport != null" style="margin: 100px;margin-left: 300px;">
+      <h3>{{selectedReport.name}} Reports Description</h3>
+      <ol>
+        <li class="row" *ngFor="let details of selectedReport.hasReports; let i = index">
+          {{details.description}}
+        </li>
+      </ol>
+      <div class="btn btn-success pull-right" (click)="ignoreUser(selectedReport)" > <span class="fa fa-check-circle"></span> Ignore</div>
+      <button class="btn btn-danger pull-right" (click)="blockUser(selectedReport)"> <span class="fa fa-ban"></span> Block</button>
+    </div>
+

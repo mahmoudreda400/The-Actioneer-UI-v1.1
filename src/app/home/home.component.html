@@ -47,23 +47,25 @@
     <div class="col">
       <div class="row" >
         <ng-container *ngFor="let product of filteredProducts; let i = index">
-          <div class="col-lg-2" style="padding-right: 10px;padding-left: 10px;">
+         
+          <div class="col-lg-2" style="padding-right: 10px;padding-left: 10px;" *ngIf="product?.photos != null &&product?.photos[0] != null">
             <div >
               
-              <div *ngIf="product.itemName" class="cardd">
-                <div class="row">
-                  <div class="col-md-8">user name</div>
+              <div *ngIf="product.title" class="cardd">
+                
+                <div class="row" >
+                  <div class="col-md-8">{{product?.user?.name}}</div>
                   <div class="col-md-4">
                       <select (change)="itemAction($event, product)" id="menuActions"  class="form-control" style="width: 20px;height: 20px">
                           <option value="none"></option>
-                          <option value="edit"> <a style="color: #fff" class="actionBtn" class="actionBtn">Edit Post</a></option>
+                          <option value="edit"> <a style="color: #fff" class="actionBtn" class="actionBtn">Edit Post</a></option> 
                           <option value="report">Report User</option>
                         </select>
                   </div>
                 </div>
-                <img *ngIf="product.photosURL" class="img-responsive card-img" (click)="goToDetails(product)" [src]="product.photosURL" alt="{{ product.itemName }}">
+                <img  class="img-responsive card-img" (click)="goToDetails(product)" [src]="apiService.getPhotoUrl(product.photos[0].url)">
                 <div class="card-body">
-                  <p class="card-text">{{ product.price | currency:'USD':true }}</p>
+                  <p class="card-text">{{ product.minPrice | currency:'USD':true }}</p>
                 </div>
               </div>
             </div>

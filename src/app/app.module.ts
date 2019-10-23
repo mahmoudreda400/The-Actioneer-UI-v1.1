@@ -12,11 +12,15 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminReportsComponent } from './admin-reports/admin-reports.component';
 import { AdminBlockedUsersComponent } from './admin-blocked-users/admin-blocked-users.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ProductDetailsComponent } from './product-details/product-details.component'; 
-
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ProfileComponent } from './profile/profile.component';
+import { StatisticsComponent } from './statistics/statistics.component'; 
+import { GoogleChartsModule } from 'angular-google-charts';
+import { ReportsComponent } from './reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -30,9 +34,14 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     AdminDashboardComponent,
     AdminReportsComponent,
     AdminBlockedUsersComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    ProfileComponent,
+    StatisticsComponent,
+    ReportsComponent
   ],
   imports: [
+    GoogleChartsModule.forRoot(),
+    AngularFontAwesomeModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

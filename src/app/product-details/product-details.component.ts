@@ -12,6 +12,9 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.product = JSON.parse(sessionStorage.getItem('selectedProduct'));
+    // this.getFilteredProducts();
+   // this.apiService.getPostById
+    //});
   }
 
   bid(product){

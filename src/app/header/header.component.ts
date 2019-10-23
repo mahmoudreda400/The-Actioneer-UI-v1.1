@@ -20,6 +20,8 @@ export class HeaderComponent implements OnInit {
   registerForm: FormGroup;
   loginSubmitted = false;
   registerSubmitted= false;
+  notifications=[];
+
   constructor(
     private router: Router, private apiService: ApiService, private formBuilder: FormBuilder) {
     this.loginShow = false;
@@ -32,8 +34,10 @@ export class HeaderComponent implements OnInit {
   }
 
   checkUserExist(){
-    if(localStorage.getItem('userData'))
+    if(localStorage.getItem('userData')){
         this.appUser = JSON.parse(localStorage.getItem('userData'));
+        this.getUserNotifications();
+      }
   }
 
   createLoginForm() {
@@ -130,5 +134,11 @@ export class HeaderComponent implements OnInit {
     //this.auth.logout();
   }
 
+  getUserNotifications(){
+    this.apiService.getUserNotifications().subscribe(data => {
+      console.log('>> user notifications: ',data);
+      this.notifications = data;
+    });
+  }
 
 }

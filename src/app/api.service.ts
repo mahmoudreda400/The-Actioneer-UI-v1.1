@@ -10,14 +10,15 @@ export class ApiService {
 
   ip = "http://localhost";
   baseUrl = this.ip + ":8085";
+  webSocketPath = this.baseUrl + '/gkz-stomp-endpoint';
 
   constructor(private http: HttpClient) { }
 
   getPhotoUrl(url) {
-    // if (url != null) {
-    //   let imagePath = url.substr(url.indexOf('/auctioneer')).replace(' ', '%20');
-    //   return this.ip + imagePath;
-    // }
+    if (url != null) {
+      let imagePath = url.substr(url.indexOf('/auctioneer')).replace(' ', '%20');
+      return this.ip + imagePath;
+    }
     return url;
   }
   register(person): Observable<any> {

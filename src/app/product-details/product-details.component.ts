@@ -35,10 +35,12 @@ export class ProductDetailsComponent implements OnInit {
       this.product= data;
       this.biddingValue = this.product.minPrice + this.product.incrValue;
       this.biddings = data.biddings;
+      if(this.biddings != null && this.biddings.length > 0){
       this.biddings.sort(function(a: any,b: any){
         return b.id - a.id;
       })
       this.lastBidderName = this.biddings[0].user.name;
+    }
     });
   }
 

@@ -1,12 +1,12 @@
 <app-header></app-header>
-<div class="row" style="padding: 0px;margin: 0px;padding-top: 30px;">
+<div class="row" style="padding-left: 0px;margin: 0px;padding-top: 30px;">
       <img src="assets/images/banner5.png" width="100%" height="260" >
     </div>
 <div class="container" *ngIf="profileForm != null">
   <form [formGroup]="profileForm" class="form-group" (ngSubmit)="SaveProfileData()" *ngIf="!loginShow">
     <div class="row">
-      <div class="col-md-3 pull-right">name</div>
-      <div class="col-md-6">
+      <div class="col-md-2 pull-right">name</div>
+      <div class="col-md-10">
         <input class="form-control" id="name" name="name" formControlName="name" type="text" placeholder="maiada"
            required />
         <!-- <div *ngIf="submitted && profileForm.controls.name.errors" class="error-msg">
@@ -15,29 +15,34 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-3 pull-right">Phone</div>
-      <div class="col-md-6">
+      <div class="col-md-2 pull-right">Phone</div>
+      <div class="col-md-10">
         <input class="form-control" id="phone" name="phone" formControlName="phone" type="text" placeholder="phone" />
       </div>
     </div>
     <div class="row">
-      <div class="col-md-3 pull-right">email</div>
-      <div class="col-md-6">
+      <div class="col-md-2 pull-right">email</div>
+      <div class="col-md-10">
         <input class="form-control" id="email" name="email" formControlName="email" type="text" placeholder="email"
           required />
-        <!-- <div *ngIf="submitted && profileForm.controls.email.errors" class="error-msg">
-          <div *ngIf="profileForm.controls.email.errors.required">Name is required</div>
-
-        </div> -->
       </div>
     </div>
     <div class="row">
-      <div class="col-md-3 pull-right">Address</div>
-      <div class="col-md-6">
+        <div class="col-md-2 pull-right">password</div>
+        <div class="col-md-10">
+          <input class="form-control" id="password" name="password" formControlName="password" type="text" placeholder="password"
+            required />
+        </div>
+      </div>
+    <div class="row">
+      
+      <div class="col-md-2 pull-right">Address</div>
+      <div class="col-md-10">
         <input class="form-control" id="address" name="address" formControlName="address" placeholder="address"
           required />
       </div>
     </div>
+    
 
     <button type="submit" class="btn btn-primary pull-right">Edit Profile</button>
   </form>

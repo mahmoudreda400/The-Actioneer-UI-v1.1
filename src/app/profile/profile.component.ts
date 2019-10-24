@@ -31,6 +31,7 @@ export class ProfileComponent implements OnInit {
       address: [user.address]
     });
   }
+  
 getProfileData(){
   console.log(' ???? start get profile data')
   this.apiService.getProfileData().subscribe(data=>{

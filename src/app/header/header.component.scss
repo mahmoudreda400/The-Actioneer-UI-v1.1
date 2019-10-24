@@ -4,7 +4,7 @@ ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  // overflow: hidden;
   background-color: #333;
   position: fixed;
   top: 0;
@@ -29,10 +29,17 @@ li a {
 
 li a:hover:not(.active) {
   background-color: #111;
+  height: 60px;
 }
 
+li a.notify:hover {
+  background-color: #fff;
+  color: #19497A;
+  height: 85px;
+}
 .active {
   background-color: #19497A;
+  height: 60px;
 }
 //////////////////
 .dropdown-toggle{
@@ -110,8 +117,9 @@ li a:hover:not(.active) {
       .dropdown-content {
         display: none;
         position: absolute;
-        background-color: #f1f1f1;
+        background-color: #19497A;
         min-width: 160px;
+        width: 220px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
       }
@@ -120,9 +128,10 @@ li a:hover:not(.active) {
         padding: 12px 16px;
         text-decoration: none;
         display: block;
+        border-bottom:1px solid #fff ;
       }
       
-      .dropdown-content a:hover {background-color: #ddd;z-index: 10000;}
+      .dropdown-content a:hover {background-color: #19497A;z-index: 10000;}
       
       .dropdown:hover .dropdown-content {display: block;}
       

@@ -29,6 +29,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private stompClient = null;
   disabled = true;
+  activePage;
+
 
   constructor(
     private router: Router, private apiService: ApiService, private formBuilder: FormBuilder) {
@@ -36,6 +38,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    if (this.router.url == '/profile')
+      this.activePage = 'profile';
+    else if (this.router.url == '/statistics')
+      this.activePage = 'statistics';
+    else if (this.router.url == '/addProduct')
+      this.activePage = 'addProduct';
+    else if (this.router.url == '/reports')
+      this.activePage = 'reports';
+    else if (this.router.url == '/blocked')
+      this.activePage = 'blocked';
+    else
+      this.activePage = 'home';
     this.createLoginForm();
     this.createRegister();
     this.disconnect();
@@ -54,6 +68,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       let userData = JSON.parse(localStorage.getItem('userData'));
       this.userConnect(userData.id);
     }
+
   }
 
   createLoginForm() {

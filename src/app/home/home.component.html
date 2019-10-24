@@ -9,26 +9,26 @@
   <div class="row " style="margin-bottom: 20px;margin-top: 20px">
       <div class="col-lg-2" style="padding: 0;margin:0;margin-left:100px">
           <div class="categoryLabel">Category</div>
-              <select (change)="filterByCat()" class="form-control">
+              <select (change)="filterByCat( 'category',$event)" class="form-control">
                 <option *ngFor="let color of Categories" [value]="color">{{color}}</option>
               </select>
             </div>
     
           <div class="col-lg-2">
             <div class="categoryLabel">Location</div>
-              <select class="form-control">
+              <select  (change)="filterByCat('city',$event)" class="form-control">
                                  <option *ngFor="let color of Cities" [value]="color.id">{{color.Name}}</option>
               </select>
                 </div>
                 <div class="col-lg-2">
             <div class="categoryLabel">Price</div>
-            <select  (change)="filterByCat()" class="form-control">
+            <select  (change)="filterByCat('price',$event)" class="form-control">
                         <option *ngFor="let color of Prices" [value]="color.id">{{color.Name}}</option>
                       </select>
                       </div>
                       <div class="col-lg-2">
             <div class="categoryLabel">Relatives</div>
-            <select class="form-control">
+            <select (change)="filterByCat('arrange',$event)" class="form-control">
                               <option *ngFor="let color of Relatives" [value]="color.id">{{color.Name}}</option>
                             </select>
                             </div>
@@ -48,15 +48,15 @@
       <div class="row" >
         <ng-container *ngFor="let product of filteredProducts; let i = index">
          
-          <div class="col-lg-2" style="padding-right: 10px;padding-left: 10px;" *ngIf="product?.photos != null &&product?.photos[0] != null" >
+          <div class="col-lg-2" style="padding-right: 10px;padding-left: 10px;margin-top: 40px;" *ngIf="product?.photos != null &&product?.photos[0] != null" >
             <div >
               
               <div *ngIf="product.title" class="card-body">
                 
-                <div class="row" >
-                  <div class="col-md-8">{{product?.user?.name}}</div>
-                  <div class="col-md-4">
-                      <select (change)="itemAction($event, product)" id="menuActions"  class="form-control" style="width: 20px;height: 20px">
+                <div class="row">
+                  <div class="col-md-9"><span style="color: #19497A;font-weight: bold;font-family: sans-serif;">{{product?.user?.name.toUpperCase()}}</span></div>
+                  <div class="col-md-3">
+                      <select (change)="itemAction($event, product)" id="menuActions" style="width: 20px;height: 20px">
                           <option value="none"></option>
                           <option value="edit"> <a style="color: #fff" class="actionBtn" class="actionBtn">Edit Post</a></option> 
                           <option value="report">Report User</option>
@@ -64,8 +64,8 @@
                   </div>
                 </div>
                 <img  class="img-responsive card-img" (click)="postDetails(product.id)" [src]="apiService.getPhotoUrl(product.photos[0].url)">
-                <div class="card-body">
-                  <p class="card-text">{{ product.minPrice | currency:'USD':true }}</p>
+                <div class="card-body" style="text-align: center;">
+                  <p class="card-text" style="color: orange;font-weight: bold;">{{ product.minPrice | currency:'USD':true }}</p>
                 </div>
               </div>
             </div>

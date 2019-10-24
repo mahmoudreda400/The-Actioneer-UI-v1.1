@@ -21,17 +21,32 @@ export class HeaderComponent implements OnInit {
   loginSubmitted = false;
   registerSubmitted= false;
   notifications=[];
-
+  activePage;
+  
   constructor(
     private router: Router, private apiService: ApiService, private formBuilder: FormBuilder) {
     this.loginShow = false;
   }
 
   ngOnInit() {
+    if (this.router.url == '/profile')
+      this.activePage = 'profile';
+    else if (this.router.url == '/statistics')
+      this.activePage = 'statistics';
+    else if (this.router.url == '/addProduct')
+      this.activePage = 'addProduct';
+    else if (this.router.url == '/reports')
+      this.activePage = 'reports';
+    else if (this.router.url == '/blocked')
+      this.activePage = 'blocked';
+    else
+      this.activePage = 'home';
     this.createLoginForm();
     this.createRegister();
     this.checkUserExist();
   }
+
+  
 
   checkUserExist(){
     if(localStorage.getItem('userData')){

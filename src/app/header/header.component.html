@@ -1,11 +1,11 @@
 <ul>
-    <li><a id="homeScreen" class="active" routerLink="/">Home</a></li>
-    <li *ngIf="appUser"><a id="profileScreen" routerLink="/profile">Profile</a></li>
-    <li *ngIf="appUser"><a id="sellScreen" routerLink="/addProduct">Sell Your Staff</a></li>
+    <li><a id="homeScreen" [ngClass]="{ 'active': activePage == 'home' }" routerLink="/">Home</a></li>
+    <li *ngIf="appUser"><a [ngClass]="{ 'active': activePage == 'profile' }"  routerLink="/profile">Profile</a></li>
+    <li *ngIf="appUser"><a [ngClass]="{ 'active': activePage == 'addProduct' }"  routerLink="/addProduct">Sell Your Staff</a></li>
     <li class="credential" *ngIf="!appUser"><a href="#" (click)="showLogin()">Login</a></li>
-    <li *ngIf="appUser && appUser.type == 'admin'"><a routerLink="/statistics" >Statistics</a></li>
-    <li *ngIf="appUser && appUser.type == 'admin'"><a id="reportsScreen" routerLink="/reports" >Reports</a></li>
-    <li *ngIf="appUser && appUser.type == 'admin'"><a id="blockedScreen" routerLink="/blocked" >Blocked Users</a></li>
+    <li *ngIf="appUser && appUser.type == 'admin'"><a [ngClass]="{ 'active': activePage == 'statistics' }"  routerLink="/statistics" >Statistics</a></li>
+    <li *ngIf="appUser && appUser.type == 'admin'"><a [ngClass]="{ 'active': activePage == 'reports' }"  id="reportsScreen" routerLink="/reports" >Reports</a></li>
+    <li *ngIf="appUser && appUser.type == 'admin'"><a [ngClass]="{ 'active': activePage == 'blocked' }"  id="blockedScreen" routerLink="/blocked" >Blocked Users</a></li>
     <li class="credential" *ngIf="appUser"><a href="#"  (click)="logout()"> Logout </a></li>
     <li class="credential" *ngIf="appUser"><a href="#" >{{ appUser.name }}</a></li>
 
@@ -15,8 +15,15 @@
         <span class="badge" >{{notifications.length}}</span>
       </a>
       <div class="dropdown-content" *ngFor="let not of notifications">
-        <a>You Got An Item: {{not.post.title}}<br> price{{not.price}}</a>
+        <a class="notify">You Got An Item: <span style="font-weight: bold;">{{not.post.title}}</span><br>
+          <span style="font-weight: bold;"> price{{not.price}}</span></a>
       </div>
+      <!-- <div class="dropdown-content">
+          <a href="#" class="notify">You Got An Item: <span style="font-weight: bold;">Car </span> <br> 
+            price <span style="font-weight: bold;">$4.50</span></a>
+            <a href="#" class="notify">You Got An Item: <span style="font-weight: bold;">Car </span> <br> 
+              price <span style="font-weight: bold;">$4.50</span></a>
+        </div> -->
     
     </li>
     

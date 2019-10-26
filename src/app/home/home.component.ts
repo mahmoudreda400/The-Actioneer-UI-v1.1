@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit {
   reportUser(reportMsg){
     // alert(reportMsg);
     // alert(this.currentProduct.price);
-    this.apiService.reportUser(reportMsg, this.currentProduct).subscribe(data => {
+    this.apiService.reportUser(reportMsg, this.currentProduct.user).subscribe(data => {
       console.log(data);
       
     });

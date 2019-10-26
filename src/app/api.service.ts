@@ -57,7 +57,7 @@ export class ApiService {
 
   reportUser(msg: string, reported) {
     //TODO fixme
-    reported = { id: 1 };
+    // reported = { id: 1 };
     // let token = localStorage.getItem("token") || "";
 
     // let headers = new HttpHeaders({
